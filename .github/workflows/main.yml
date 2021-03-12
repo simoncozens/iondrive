@@ -19,7 +19,7 @@ jobs:
           toolchain: stable
           override: true
       - name: Setup Python environment
-        uses: actions/setup-python@v1.1.1
+        uses: actions/setup-python@v1
         with:
           python-version: 3.7
       - name: rust-cargo
