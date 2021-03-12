@@ -109,7 +109,12 @@ impl ToWrappedPyObject for Arc<norad::Glyph> {
                             .to_object(py)
                     }),
             ),
-            ("lib", self.lib.to_object(py)),
+            (
+                "lib",
+                self.lib
+                    .as_ref()
+                    .map_or(PyDict::new(py).to_object(py), |l| l.to_object(py)),
+            ),
             ("note", self.note.to_object(py)),
             (
                 "anchors",

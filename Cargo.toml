@@ -1,6 +1,6 @@
 [package]
 name = "iondrive"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Simon Cozens <simon@simon-cozens.org>"]
 edition = "2018"
 
@@ -15,7 +15,6 @@ crate-type = ["cdylib"]
 [package.metadata.maturin]
 classifier = [
   "Programming Language :: Rust",
-  "Text Processing :: Fonts"
 ]
 
     [dependencies.pyo3]
