@@ -7,9 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: konstin2/maturin:master
-      volumes:
-        - .:/io
-
     steps:
       - name: checkout
         uses: actions/checkout@v1
