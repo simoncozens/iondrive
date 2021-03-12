@@ -1,0 +1,23 @@
+[package]
+name = "hyperdrive"
+version = "0.1.0"
+authors = ["Simon Cozens <simon@simon-cozens.org>"]
+edition = "2018"
+
+[dependencies]
+rayon = "^1.3"
+norad = { version = "^0.3", features = ["rayon"] }
+plist = "^1.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[package.metadata.maturin]
+classifier = [
+  "Programming Language :: Rust",
+  "Multimedia :: Graphics :: Editors :: Vector-Based"
+]
+
+    [dependencies.pyo3]
+    version = "0.13.2"
+    features = ["extension-module"]
