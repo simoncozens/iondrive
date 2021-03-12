@@ -1,5 +1,5 @@
 [package]
-name = "hyperdrive"
+name = "iondrive"
 version = "0.1.0"
 authors = ["Simon Cozens <simon@simon-cozens.org>"]
 edition = "2018"
@@ -15,7 +15,7 @@ crate-type = ["cdylib"]
 [package.metadata.maturin]
 classifier = [
   "Programming Language :: Rust",
-  "Multimedia :: Graphics :: Editors :: Vector-Based"
+  "Text Processing :: Fonts"
 ]
 
     [dependencies.pyo3]

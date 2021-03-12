@@ -1,5 +1,6 @@
 use pyo3::types::IntoPyDict;
 use pyo3::types::PyDict;
+use pyo3::types::PyList;
 
 use std::collections::BTreeMap;
 use std::ffi::OsStr;
@@ -96,36 +97,51 @@ impl ToWrappedPyObject for Arc<norad::Glyph> {
         let cls = loader.get("Glyph").unwrap();
         let kwargs = [
             ("name", self.name.to_object(py)),
-            ("width", self.advance_width().to_object(py)),
+            ("width", self.advance_width().unwrap_or(0.0).to_object(py)),
             (
                 "unicodes",
-                self.codepoints.as_ref().map_or(py.None(), |cp| {
-                    cp.iter()
-                        .map(|l| (*l as u32).to_object(py))
-                        .collect::<Vec<PyObject>>()
-                        .to_object(py)
-                }),
+                self.codepoints
+                    .as_ref()
+                    .map_or(PyList::empty(py).to_object(py), |cp| {
+                        cp.iter()
+                            .map(|l| (*l as u32).to_object(py))
+                            .collect::<Vec<PyObject>>()
+                            .to_object(py)
+                    }),
             ),
             ("lib", self.lib.to_object(py)),
             ("note", self.note.to_object(py)),
-            ("anchors", self.anchors.to_wrapped_object(loader, py)),
+            (
+                "anchors",
+                self.anchors
+                    .as_ref()
+                    .map_or(PyList::empty(py).to_object(py), |a| {
+                        a.to_wrapped_object(loader, py)
+                    }),
+            ),
             (
                 "contours",
                 self.outline
                     .as_ref()
-                    .map_or(py.None(), |c| c.contours.to_wrapped_object(loader, py)),
+                    .map_or(PyList::empty(py).to_object(py), |c| {
+                        c.contours.to_wrapped_object(loader, py)
+                    }),
             ),
             (
                 "components",
                 self.outline
                     .as_ref()
-                    .map_or(py.None(), |c| c.components.to_wrapped_object(loader, py)),
+                    .map_or(PyList::empty(py).to_object(py), |c| {
+                        c.components.to_wrapped_object(loader, py)
+                    }),
             ),
             (
                 "guidelines",
                 self.guidelines
                     .as_ref()
-                    .map_or(py.None(), |g| g.to_wrapped_object(loader, py)),
+                    .map_or(PyList::empty(py).to_object(py), |g| {
+                        g.to_wrapped_object(loader, py)
+                    }),
             ),
         ]
         .into_py_dict(py);
@@ -178,6 +194,18 @@ fn wrap_layerset(
     .into()
 }
 
+fn wrap_kerning(kerning: Option<&BTreeMap<String, BTreeMap<String, f32>>>, py: Python) -> PyObject {
+    if kerning.is_none() {
+        return py.None();
+    }
+    let d = PyDict::new(py);
+    for (left, v) in kerning.unwrap().iter() {
+        for (right, kern) in v.iter() {
+            d.set_item((left, right).to_object(py), kern.to_object(py));
+        }
+    }
+    d.into()
+}
 impl ToWrappedPyObject for norad::Ufo {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
         let font = loader.get("Font").unwrap();
@@ -196,7 +224,7 @@ impl ToWrappedPyObject for norad::Ufo {
             ("info", self.font_info.to_wrapped_object(loader, py)),
             ("features", pyo3::ToPyObject::to_object(&self.features, py)),
             ("groups", self.groups.to_object(py)),
-            ("kerning", pyo3::ToPyObject::to_object(&self.kerning, py)),
+            ("kerning", wrap_kerning(self.kerning.as_ref(), py)),
         ]
         .into_py_dict(py);
         font.call((), Some(kwargs)).unwrap().into()
@@ -215,7 +243,7 @@ fn load(loader: &PyModule, path: &PyUnicode) -> PyResult<PyObject> {
 }
 
 #[pymodule]
-fn hyperdrive(_py: Python, m: &PyModule) -> PyResult<()> {
+fn iondrive(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(load, m)?).unwrap();
 
     Ok(())

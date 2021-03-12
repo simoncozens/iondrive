@@ -15,15 +15,15 @@ with open("README.md", "r") as readme_file:
     long_description = readme_file.read()
 
 setup(
-    name="hyperdrive",
+    name="iondrive",
     version=version,
     author="Simon Cozens",
     author_email="simon@simon-cozens.org",
     description="Accelerates UFO loading with norad.rs",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/simoncozens/hyperdrive",
-    packages=["hyperdrive"],
+    url="https://github.com/simoncozens/iondrive",
+    packages=["iondrive"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Rust",
