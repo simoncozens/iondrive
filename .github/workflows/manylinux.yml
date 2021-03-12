@@ -1,0 +1,24 @@
+name: manylinux
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: konstin2/maturin:master
+      volumes:
+        - .:/io
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: maturin-build
+        run: |
+          rustup default 1.41.0
+          maturin build --release
+      - uses: actions/upload-artifact@v1
+        name: upload-wheel
+        with:
+          name: wheel-manylinux
+          path: target/wheels/
