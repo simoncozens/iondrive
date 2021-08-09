@@ -1,4 +1,4 @@
-use crate::{MyToPyObject,ToWrappedPyObject};
+use crate::{MyToPyObject, ToWrappedPyObject};
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
 
@@ -10,7 +10,8 @@ impl MyToPyObject for norad::glyph::PointType {
             norad::PointType::OffCurve => None,
             norad::PointType::Curve => Some("curve".to_string()),
             norad::PointType::QCurve => Some("qcurve".to_string()),
-        }.to_object(py)
+        }
+        .to_object(py)
     }
 }
 
