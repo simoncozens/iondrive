@@ -224,7 +224,13 @@ impl ToWrappedPyObject for norad::Ufo {
             .map(|l| &l.name);
 
         let kwargs = [
-            ("lib", self.lib.to_object(py)),
+            (
+                "lib",
+                match &self.lib {
+                    Some(lib) => lib.to_object(py),
+                    None => PyDict::new(py).into(),
+                },
+            ),
             (
                 "layers",
                 wrap_layerset(self.layers.as_ref(), default_layer_name, loader, py),
