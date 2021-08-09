@@ -4,7 +4,7 @@ use pyo3::types::IntoPyDict;
 
 impl ToWrappedPyObject for norad::Guideline {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Guideline").unwrap();
+        let cls = loader.getattr("Guideline").unwrap();
         let (x, y, angle) = match self.line {
             norad::Line::Vertical(x) => (Some(x), None, None),
             norad::Line::Horizontal(y) => (None, Some(y), None),

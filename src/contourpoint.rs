@@ -2,7 +2,7 @@ use crate::{MyToPyObject, ToWrappedPyObject};
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
 
-impl MyToPyObject for norad::glyph::PointType {
+impl MyToPyObject for norad::PointType {
     fn to_object(&self, py: Python) -> PyObject {
         match self {
             norad::PointType::Move => Some("move".to_string()),
@@ -17,7 +17,7 @@ impl MyToPyObject for norad::glyph::PointType {
 
 impl ToWrappedPyObject for norad::ContourPoint {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Point").unwrap();
+        let cls = loader.getattr("Point").unwrap();
         let kwargs = [
             ("x", self.x.to_object(py)),
             ("y", self.y.to_object(py)),

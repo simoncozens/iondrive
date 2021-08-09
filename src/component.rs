@@ -4,7 +4,7 @@ use pyo3::types::IntoPyDict;
 
 impl ToWrappedPyObject for norad::Component {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Component").unwrap();
+        let cls = loader.getattr("Component").unwrap();
         let kwargs = [
             ("baseGlyph", self.base.to_object(py)),
             (

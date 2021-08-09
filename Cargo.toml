@@ -5,8 +5,9 @@ authors = ["Simon Cozens <simon@simon-cozens.org>"]
 edition = "2018"
 
 [dependencies]
-rayon = "^1.3"
-norad = { version = "^0.3", features = ["rayon"] }
+rayon = "^1.5"
+norad = { version = "^0.4", features = ["rayon"] }
+pyo3 = { version = "^0.14", features = ["extension-module"] }
 plist = "^1.1"
 
 [lib]
@@ -16,7 +17,3 @@ crate-type = ["cdylib"]
 classifier = [
   "Programming Language :: Rust",
 ]
-
-    [dependencies.pyo3]
-    version = "0.13.2"
-    features = ["extension-module"]

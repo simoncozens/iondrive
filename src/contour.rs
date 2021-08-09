@@ -4,7 +4,7 @@ use pyo3::types::IntoPyDict;
 
 impl ToWrappedPyObject for norad::Contour {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Contour").unwrap();
+        let cls = loader.getattr("Contour").unwrap();
         let kwargs = [
             ("points", self.points.to_wrapped_object(loader, py)),
             (

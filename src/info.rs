@@ -40,7 +40,7 @@ impl MyToPyObject for NonNegativeIntegerOrFloat {
 
 impl ToWrappedPyObject for norad::FontInfo {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Info").unwrap();
+        let cls = loader.getattr("Info").unwrap();
         let kwargs = [
             ("ascender", self.ascender.to_object(py)),
             ("capHeight", self.cap_height.to_object(py)),
