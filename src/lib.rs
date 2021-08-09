@@ -200,17 +200,20 @@ fn wrap_layerset(
 }
 
 fn wrap_kerning(kerning: Option<&BTreeMap<String, BTreeMap<String, f32>>>, py: Python) -> PyObject {
-    if kerning.is_none() {
-        return py.None();
-    }
-    let d = PyDict::new(py);
-    for (left, v) in kerning.unwrap().iter() {
-        for (right, kern) in v.iter() {
-            d.set_item((left, right).to_object(py), kern.to_object(py));
+    match kerning {
+        Some(kerning) => {
+            let d = PyDict::new(py);
+            for (left, v) in kerning.iter() {
+                for (right, kern) in v.iter() {
+                    d.set_item((left, right).to_object(py), kern.to_object(py)).unwrap();
+                }
+            }
+            d.into()
         }
+        None => PyDict::new(py).into(),
     }
-    d.into()
 }
+
 impl ToWrappedPyObject for norad::Ufo {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
         let font = loader.get("Font").unwrap();
@@ -228,7 +231,13 @@ impl ToWrappedPyObject for norad::Ufo {
             ),
             ("info", self.font_info.to_wrapped_object(loader, py)),
             ("features", pyo3::ToPyObject::to_object(&self.features, py)),
-            ("groups", self.groups.to_object(py)),
+            (
+                "groups",
+                match &self.groups {
+                    Some(groups) => groups.to_object(py),
+                    None => PyDict::new(py).into(),
+                },
+            ),
             ("kerning", wrap_kerning(self.kerning.as_ref(), py)),
         ]
         .into_py_dict(py);
