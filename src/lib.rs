@@ -144,7 +144,7 @@ fn wrap_layerset(layers: &norad::LayerSet, loader: &PyModule, py: Python) -> PyO
     cls.call_method(
         "from_iterable",
         (
-            layers.default_layer().to_wrapped_object(loader, py),
+            vec![layers.default_layer().to_wrapped_object(loader, py)],
             layers.default_layer().name().as_ref(),
         ),
         None,
