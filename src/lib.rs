@@ -141,13 +141,15 @@ impl ToWrappedPyObject for norad::Layer {
 }
 
 fn wrap_layerset(layers: &norad::LayerSet, loader: &PyModule, py: Python) -> PyObject {
+    let wrapped_layers: Vec<PyObject> = layers
+        .iter()
+        .map(|l| l.to_wrapped_object(loader, py))
+        .collect();
+
     let cls = loader.getattr("LayerSet").unwrap();
     cls.call_method(
         "from_iterable",
-        (
-            vec![layers.default_layer().to_wrapped_object(loader, py)],
-            layers.default_layer().name().as_ref(),
-        ),
+        (wrapped_layers, layers.default_layer().name().as_ref()),
         None,
     )
     .unwrap()
