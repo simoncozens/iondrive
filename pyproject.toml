@@ -4,3 +4,12 @@ build-backend = "maturin"
 
 [tool.maturin]
 bindings = "pyo3"
+
+# https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
+[tool.black]
+target-version = ["py36"]
+
+# https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#isort
+[tool.isort]
+profile = "black"
+known_first_party = "iondrive"
