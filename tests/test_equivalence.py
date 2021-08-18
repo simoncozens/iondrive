@@ -1,15 +1,23 @@
-import iondrive
+from pathlib import Path
+
+import pytest
 import ufoLib2
 
-ufo_font = ufoLib2.Font.open("tests/data/MutatorSansBoldCondensed.ufo")
-iondrive_font = iondrive.load(ufoLib2.objects, "tests/data/MutatorSansBoldCondensed.ufo")
+import iondrive
 
-def test_counts():
-	assert len(ufo_font.layers) == len(iondrive_font.layers)
-	assert len(ufo_font) == len(iondrive_font)
+UFOS = [
+    Path("tests/data/MutatorSansBoldCondensed.ufo"),
+    Path("tests/data/UbuTestData.ufo"),
+]
 
-def test_kerning():
-	assert ufo_font.kerning == iondrive_font.kerning
 
-def test_features():
-	assert ufo_font.features == iondrive_font.features
+@pytest.mark.parametrize("path", UFOS)
+def test_equivalence(path: Path) -> None:
+    ufo_font = ufoLib2.Font.open(path)
+    iondrive_font = iondrive.load(ufoLib2.objects, path)
+
+    assert len(ufo_font) == len(iondrive_font)
+    assert len(ufo_font.layers) == len(iondrive_font.layers)
+    assert ufo_font.groups == iondrive_font.groups
+    assert ufo_font.kerning == iondrive_font.kerning
+    assert ufo_font.features == iondrive_font.features
