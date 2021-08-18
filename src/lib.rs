@@ -189,10 +189,9 @@ impl ToWrappedPyObject for norad::Font {
             ),
             (
                 "groups",
-                match &self.groups {
-                    Some(groups) => groups.to_object(py),
-                    None => PyDict::new(py).into(),
-                },
+                self.groups
+                    .as_ref()
+                    .map_or(PyDict::new(py).to_object(py), |v| v.to_object(py)),
             ),
             ("kerning", wrap_kerning(self.kerning.as_ref(), py)),
         ]
