@@ -180,7 +180,13 @@ impl ToWrappedPyObject for norad::Font {
             ("lib", self.lib.to_object(py)),
             ("layers", wrap_layerset(&self.layers, loader, py)),
             ("info", self.font_info.to_wrapped_object(loader, py)),
-            ("features", pyo3::ToPyObject::to_object(&self.features, py)),
+            (
+                "features",
+                self.features
+                    .as_ref()
+                    .map_or("", |v| v.as_str())
+                    .to_object(py),
+            ),
             (
                 "groups",
                 match &self.groups {
