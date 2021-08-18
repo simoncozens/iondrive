@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 use std::path::Path;
+use std::path::PathBuf;
 use std::sync::Arc;
 
 use pyo3::exceptions::PyValueError;
@@ -193,10 +194,10 @@ impl ToWrappedPyObject for norad::Font {
 }
 
 #[pyfunction]
-fn load(loader: &PyModule, path: &str) -> PyResult<PyObject> {
+fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
-    match norad::Font::load(Path::new(path)) {
+    match norad::Font::load(Path::new(&path)) {
         Ok(ufo) => Ok(ufo.to_wrapped_object(loader, py)),
         Err(error) => Err(PyValueError::new_err(error.to_string())),
     }
