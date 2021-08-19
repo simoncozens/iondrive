@@ -3,7 +3,8 @@ use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
 
-use pyo3::exceptions::PyValueError;
+use pyo3::create_exception;
+use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
 use pyo3::types::PyDict;
@@ -200,19 +201,34 @@ impl ToWrappedPyObject for norad::Font {
     }
 }
 
+create_exception!(readwrite_ufo_glif, IondriveError, PyException);
+
+/// Load and return a UFO from `path`, using the objects from `font_objects_module`.
+///
+/// The font objects module is the Python namespace containing the classes as
+/// exported by ufoLib2, typically this will be the module `ufoLib2.objects`.
 #[pyfunction]
+#[pyo3(text_signature = "(font_objects_module, path, /)")]
 fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
     match norad::Font::load(Path::new(&path)) {
         Ok(ufo) => Ok(ufo.to_wrapped_object(loader, py)),
-        Err(error) => Err(PyValueError::new_err(error.to_string())),
+        Err(error) => Err(IondriveError::new_err(error.to_string())),
     }
 }
 
+/// Iondrive is a glue library to load [Unified Font Object](ufo) files using norad.
+///
+/// The goal is to load data faster than can be done by Python and then pass it
+/// over to Python.
+///
+/// [ufo]: https://unifiedfontobject.org/
 #[pymodule]
-fn iondrive(_py: Python, m: &PyModule) -> PyResult<()> {
+fn iondrive(py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(load, m)?).unwrap();
+
+    m.add("IondriveError", py.get_type::<IondriveError>())?;
 
     Ok(())
 }
