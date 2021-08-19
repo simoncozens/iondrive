@@ -11,7 +11,7 @@ UFOS = [
 ]
 
 
-@pytest.mark.parametrize("path", UFOS)
+@pytest.mark.parametrize("path", UFOS, ids=lambda p: p.name)
 def test_equivalence(path: Path) -> None:
     ufo_font = ufoLib2.Font.open(path)
     iondrive_font = iondrive.load(ufoLib2.objects, path)
