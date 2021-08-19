@@ -156,7 +156,7 @@ fn wrap_layerset(layers: &norad::LayerSet, loader: &PyModule, py: Python) -> PyO
     .into()
 }
 
-fn wrap_kerning(kerning: Option<&BTreeMap<String, BTreeMap<String, f32>>>, py: Python) -> PyObject {
+fn wrap_kerning(kerning: Option<&norad::kerning::Kerning>, py: Python) -> PyObject {
     match kerning {
         Some(kerning) => {
             let d = PyDict::new(py);
