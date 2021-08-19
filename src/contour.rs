@@ -12,7 +12,6 @@ impl ToWrappedPyObject for norad::Contour {
                 self.identifier()
                     .map_or(py.None(), |i| i.as_str().to_object(py)),
             ),
-            // ("lib", self.lib().map_or(py.None(), |l| l.to_object(py))),
         ]
         .into_py_dict(py);
         cls.call((), Some(kwargs)).unwrap().into()
