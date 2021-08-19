@@ -126,7 +126,7 @@ impl ToWrappedPyObject for norad::Layer {
                     .collect::<Vec<PyObject>>()
                     .to_object(py),
             ),
-            // ("lib", self.layer.lib.to_object(py)),
+            ("lib", self.lib.to_object(py)),
             (
                 "color",
                 self.color
