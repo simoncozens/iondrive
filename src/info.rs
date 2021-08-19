@@ -5,6 +5,7 @@ use norad::IntegerOrFloat;
 use norad::NonNegativeIntegerOrFloat;
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
+use pyo3::types::PyList;
 
 impl MyToPyObject for StyleMapStyle {
     fn to_object(&self, py: Python) -> PyObject {
@@ -14,6 +15,61 @@ impl MyToPyObject for StyleMapStyle {
             StyleMapStyle::Bold => "bold".to_string(),
             StyleMapStyle::BoldItalic => "bold italic".to_string(),
         }
+        .to_object(py)
+    }
+}
+
+impl MyToPyObject for norad::fontinfo::GaspRangeRecord {
+    fn to_object(&self, py: Python) -> PyObject {
+        [
+            ("rangeMaxPPEM", self.range_max_ppem.to_object(py)),
+            ("rangeGaspBehavior", self.range_gasp_behavior.to_object(py)),
+        ]
+        .into_py_dict(py)
+        .to_object(py)
+    }
+}
+
+impl MyToPyObject for norad::fontinfo::GaspBehavior {
+    fn to_object(&self, py: Python) -> PyObject {
+        (*self as u8).to_object(py)
+    }
+}
+
+impl MyToPyObject for norad::fontinfo::Os2Panose {
+    fn to_object(&self, py: Python) -> PyObject {
+        vec![
+            self.family_type,
+            self.serif_style,
+            self.weight,
+            self.proportion,
+            self.contrast,
+            self.stroke_variation,
+            self.arm_style,
+            self.letterform,
+            self.midline,
+            self.x_height,
+        ]
+        .to_object(py)
+    }
+}
+
+impl MyToPyObject for norad::fontinfo::Os2FamilyClass {
+    fn to_object(&self, py: Python) -> PyObject {
+        vec![self.class_id, self.subclass_id].to_object(py)
+    }
+}
+
+impl MyToPyObject for norad::fontinfo::NameRecord {
+    fn to_object(&self, py: Python) -> PyObject {
+        [
+            ("nameID", self.name_id.to_object(py)),
+            ("platformID", self.platform_id.to_object(py)),
+            ("encodingID", self.encoding_id.to_object(py)),
+            ("languageID", self.language_id.to_object(py)),
+            ("string", self.string.to_object(py)),
+        ]
+        .into_py_dict(py)
         .to_object(py)
     }
 }
@@ -47,7 +103,14 @@ impl ToWrappedPyObject for norad::FontInfo {
             ("copyright", self.copyright.to_object(py)),
             ("descender", self.descender.to_object(py)),
             ("familyName", self.family_name.to_object(py)),
-            // ("guidelines", self.guidelines.to_object(py)),
+            (
+                "guidelines",
+                self.guidelines
+                    .as_ref()
+                    .map_or(PyList::empty(py).to_object(py), |v| {
+                        v.to_wrapped_object(loader, py)
+                    }),
+            ),
             ("italicAngle", self.italic_angle.to_object(py)),
             (
                 "macintoshFONDFamilyID",
@@ -55,7 +118,10 @@ impl ToWrappedPyObject for norad::FontInfo {
             ),
             ("macintoshFONDName", self.macintosh_fond_name.to_object(py)),
             ("note", self.note.to_object(py)),
-            // ("openTypeGaspRangeRecords", self.open_type_gasp_range_records.to_object(py)),
+            (
+                "openTypeGaspRangeRecords",
+                self.open_type_gasp_range_records.to_object(py),
+            ),
             (
                 "openTypeHeadCreated",
                 self.open_type_head_created.to_object(py),
@@ -132,6 +198,10 @@ impl ToWrappedPyObject for norad::FontInfo {
                 self.open_type_name_preferred_subfamily_name.to_object(py),
             ),
             (
+                "openTypeNameRecords",
+                self.open_type_name_records.to_object(py),
+            ),
+            (
                 "openTypeNameSampleText",
                 self.open_type_name_sample_text.to_object(py),
             ),
@@ -155,6 +225,11 @@ impl ToWrappedPyObject for norad::FontInfo {
                 "openTypeOS2CodePageRanges",
                 self.open_type_os2_code_page_ranges.to_object(py),
             ),
+            (
+                "openTypeOS2FamilyClass",
+                self.open_type_os2_family_class.to_object(py),
+            ),
+            ("openTypeOS2Panose", self.open_type_os2_panose.to_object(py)),
             (
                 "openTypeOS2Selection",
                 self.open_type_os2_selection.to_object(py),
@@ -223,6 +298,12 @@ impl ToWrappedPyObject for norad::FontInfo {
             (
                 "openTypeOS2WeightClass",
                 self.open_type_os2_weight_class.to_object(py),
+            ),
+            (
+                "openTypeOS2WidthClass",
+                self.open_type_os2_width_class
+                    .map(|x| x as u8)
+                    .to_object(py),
             ),
             (
                 "openTypeOS2WinAscent",
@@ -365,18 +446,9 @@ impl ToWrappedPyObject for norad::FontInfo {
         cls.call((), Some(kwargs)).unwrap().into()
     }
 }
-//     // #[getter]
-//     // fn openTypeOS2FamilyClass(&self) -> Option<OS2FamilyClass> {
-//     //     self.fontinfo.open_type_os2_family_class
-//     // }
-//     // #[getter]
-//     // fn openTypeOS2Panose(&self) -> Option<OS2Panose> {
-//     //     self.fontinfo.open_type_os2_panose
-//     // }
-//     // #[getter]
-//     // fn openTypeOS2WidthClass(&self) -> Option<OS2WidthClass> {
-//     //     self.fontinfo.open_type_os2_width_class
-//     // }
+
+// TODO: Wrap all WOFF attributes.
+
 //     // #[getter]
 //     // fn woffMetadataCopyright(&self) -> Option<WoffMetadataCopyright> {
 //     //     self.fontinfo.woff_metadata_copyright
