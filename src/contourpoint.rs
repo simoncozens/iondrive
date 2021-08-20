@@ -35,7 +35,7 @@ impl ToWrappedPyObject for norad::ContourPoint {
     }
 }
 
-/// Converts value to a Python integer if it can be considered one, otherwise a 
+/// Converts value to a Python integer if it can be considered one, otherwise a
 /// Python float.
 fn f32_to_int_or_float(v: f32, py: Python) -> PyObject {
     if (v - v.round()).abs() < std::f32::EPSILON {
