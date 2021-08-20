@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="halfhturned" format="2">
+  <advance width="464"/>
+  <unicode hex="A7F6"/>
+  <anchor x="232" y="0" name="bottom"/>
+  <anchor x="232" y="536" name="top"/>
+  <outline>
+    <contour>
+      <point x="291" y="536" type="line"/>
+      <point x="291" y="313" type="line"/>
+      <point x="30" y="313" type="line"/>
+      <point x="30" y="239" type="line"/>
+      <point x="291" y="239" type="line"/>
+      <point x="291" y="0" type="line"/>
+      <point x="379" y="0" type="line"/>
+      <point x="379" y="536" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.glyph.leftMetricsKey</key>
+      <string>=|uni2C76</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>=|uni2C76</string>
+    </dict>
+  </lib>
+</glyph>

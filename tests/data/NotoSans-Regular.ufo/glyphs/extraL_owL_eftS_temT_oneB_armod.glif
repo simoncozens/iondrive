@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="extraLowLeftStemToneBarmod" format="2">
+  <advance width="418"/>
+  <unicode hex="A716"/>
+  <outline>
+    <contour>
+      <point x="78" y="0" type="line"/>
+      <point x="340" y="0" type="line"/>
+      <point x="340" y="66" type="line"/>
+      <point x="144" y="66" type="line"/>
+      <point x="144" y="688" type="line"/>
+      <point x="78" y="688" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Symbol</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Modifier</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="doublecircumflexcomb" format="2">
+  <unicode hex="1DCD"/>
+  <anchor x="-303" y="536" name="_top"/>
+  <anchor x="-1" y="766" name="top"/>
+  <outline>
+    <contour>
+      <point x="50" y="766" type="curve"/>
+      <point x="-48" y="766" type="line"/>
+      <point x="-131" y="722"/>
+      <point x="-308" y="654"/>
+      <point x="-420" y="616" type="curve"/>
+      <point x="-420" y="606" type="line"/>
+      <point x="-361" y="606" type="line"/>
+      <point x="-241" y="633"/>
+      <point x="-116" y="664"/>
+      <point x="0" y="701" type="curve"/>
+      <point x="107" y="664"/>
+      <point x="230" y="633"/>
+      <point x="355" y="606" type="curve"/>
+      <point x="415" y="606" type="line"/>
+      <point x="415" y="616" type="line"/>
+      <point x="266" y="668"/>
+      <point x="122" y="725"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Mark</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Nonspacing</string>
+    </dict>
+  </lib>
+</glyph>

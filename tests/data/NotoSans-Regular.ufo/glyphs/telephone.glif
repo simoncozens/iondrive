@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="telephone" format="2">
+  <advance width="808"/>
+  <unicode hex="2121"/>
+  <outline>
+    <contour>
+      <point x="118" y="362" type="line"/>
+      <point x="181" y="362" type="line"/>
+      <point x="181" y="660" type="line"/>
+      <point x="283" y="660" type="line"/>
+      <point x="283" y="714" type="line"/>
+      <point x="17" y="714" type="line"/>
+      <point x="17" y="660" type="line"/>
+      <point x="118" y="660" type="line"/>
+    </contour>
+    <contour>
+      <point x="315" y="362" type="line"/>
+      <point x="526" y="362" type="line"/>
+      <point x="526" y="416" type="line"/>
+      <point x="378" y="416" type="line"/>
+      <point x="378" y="516" type="line"/>
+      <point x="514" y="516" type="line"/>
+      <point x="514" y="570" type="line"/>
+      <point x="378" y="570" type="line"/>
+      <point x="378" y="660" type="line"/>
+      <point x="526" y="660" type="line"/>
+      <point x="526" y="714" type="line"/>
+      <point x="315" y="714" type="line"/>
+    </contour>
+    <contour>
+      <point x="592" y="362" type="line"/>
+      <point x="798" y="362" type="line"/>
+      <point x="798" y="416" type="line"/>
+      <point x="655" y="416" type="line"/>
+      <point x="655" y="714" type="line"/>
+      <point x="592" y="714" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Symbol</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.leftMetricsKey</key>
+      <string>trademark</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Other</string>
+    </dict>
+  </lib>
+</glyph>

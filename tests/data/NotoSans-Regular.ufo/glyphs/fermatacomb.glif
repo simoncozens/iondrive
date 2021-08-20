@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="fermatacomb" format="2">
+  <unicode hex="0352"/>
+  <anchor x="-1" y="536" name="_top"/>
+  <anchor x="2" y="840" name="top"/>
+  <outline>
+    <contour>
+      <point x="-156" y="706" type="curve"/>
+      <point x="-101" y="706" type="line"/>
+      <point x="-94" y="758"/>
+      <point x="-52" y="769"/>
+      <point x="0" y="769" type="curve" smooth="yes"/>
+      <point x="61" y="769"/>
+      <point x="95" y="761"/>
+      <point x="101" y="706" type="curve"/>
+      <point x="155" y="706" type="line"/>
+      <point x="150" y="788"/>
+      <point x="101" y="840"/>
+      <point x="2" y="840" type="curve"/>
+      <point x="-94" y="840"/>
+      <point x="-149" y="786"/>
+    </contour>
+    <contour>
+      <point x="0" y="606" type="curve" smooth="yes"/>
+      <point x="27" y="606"/>
+      <point x="51" y="624"/>
+      <point x="51" y="662" type="curve" smooth="yes"/>
+      <point x="51" y="701"/>
+      <point x="27" y="718"/>
+      <point x="0" y="718" type="curve" smooth="yes"/>
+      <point x="-29" y="718"/>
+      <point x="-52" y="701"/>
+      <point x="-52" y="662" type="curve" smooth="yes"/>
+      <point x="-52" y="624"/>
+      <point x="-29" y="606"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Mark</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Nonspacing</string>
+    </dict>
+  </lib>
+</glyph>

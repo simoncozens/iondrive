@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Smiddlestroke" format="2">
+  <advance width="549"/>
+  <unicode hex="A7C9"/>
+  <outline>
+    <contour>
+      <point x="27" y="335" type="line"/>
+      <point x="530" y="335" type="line"/>
+      <point x="530" y="400" type="line"/>
+      <point x="27" y="400" type="line"/>
+    </contour>
+    <component base="S"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.glyph.widthMetricsKey</key>
+      <string>S</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="charactertie" format="2">
+  <advance width="609"/>
+  <unicode hex="2040"/>
+  <outline>
+    <contour>
+      <point x="23" y="604" type="curve"/>
+      <point x="65" y="582" type="line"/>
+      <point x="116" y="689"/>
+      <point x="207" y="740"/>
+      <point x="304" y="740" type="curve" smooth="yes"/>
+      <point x="402" y="740"/>
+      <point x="494" y="689"/>
+      <point x="545" y="582" type="curve"/>
+      <point x="586" y="604" type="line"/>
+      <point x="521" y="730"/>
+      <point x="429" y="792"/>
+      <point x="304" y="792" type="curve" smooth="yes"/>
+      <point x="180" y="792"/>
+      <point x="88" y="730"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Punctuation</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Other</string>
+    </dict>
+  </lib>
+</glyph>

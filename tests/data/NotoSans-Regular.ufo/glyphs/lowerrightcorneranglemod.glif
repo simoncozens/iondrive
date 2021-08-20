@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="lowerrightcorneranglemod" format="2">
+  <advance width="346"/>
+  <unicode hex="A71A"/>
+  <outline>
+    <contour>
+      <point x="40" y="595" type="line"/>
+      <point x="306" y="595" type="line"/>
+      <point x="306" y="761" type="line"/>
+      <point x="253" y="761" type="line"/>
+      <point x="253" y="648" type="line"/>
+      <point x="40" y="648" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.leftMetricsKey</key>
+      <string>dothorizontalbarmod</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>dothorizontalbarmod</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Modifier</string>
+    </dict>
+  </lib>
+</glyph>

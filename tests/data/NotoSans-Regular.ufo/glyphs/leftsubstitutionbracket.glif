@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="leftsubstitutionbracket" format="2">
+  <advance width="500"/>
+  <unicode hex="2E02"/>
+  <outline>
+    <contour>
+      <point x="181" y="276" type="line"/>
+      <point x="181" y="561" type="line"/>
+      <point x="372" y="668" type="line"/>
+      <point x="346" y="714" type="line"/>
+      <point x="128" y="590" type="line"/>
+      <point x="128" y="276" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Punctuation</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Other</string>
+    </dict>
+  </lib>
+</glyph>

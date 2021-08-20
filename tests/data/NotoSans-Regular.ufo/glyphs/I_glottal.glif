@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Iglottal" format="2">
+  <advance width="391"/>
+  <unicode hex="A7BC"/>
+  <anchor x="172" y="0" name="bottom"/>
+  <anchor x="324" y="714" name="top"/>
+  <anchor x="466" y="714" name="topright"/>
+  <outline>
+    <contour>
+      <point x="47" y="0" type="line"/>
+      <point x="297" y="0" type="line"/>
+      <point x="307" y="49" type="line"/>
+      <point x="230" y="69" type="line"/>
+      <point x="352" y="645" type="line"/>
+      <point x="438" y="664" type="line"/>
+      <point x="448" y="714" type="line"/>
+      <point x="198" y="714" type="line"/>
+      <point x="188" y="664" type="line"/>
+      <point x="264" y="645" type="line"/>
+      <point x="142" y="69" type="line"/>
+      <point x="57" y="49" type="line"/>
+    </contour>
+    <contour>
+      <point x="8" y="479" type="line"/>
+      <point x="117" y="479"/>
+      <point x="176" y="539"/>
+      <point x="176" y="613" type="curve" smooth="yes"/>
+      <point x="176" y="672"/>
+      <point x="135" y="714"/>
+      <point x="48" y="714" type="curve" smooth="yes"/>
+      <point x="-10" y="714" type="line"/>
+      <point x="-24" y="648" type="line"/>
+      <point x="35" y="648" type="line" smooth="yes"/>
+      <point x="89" y="648"/>
+      <point x="114" y="629"/>
+      <point x="114" y="596" type="curve" smooth="yes"/>
+      <point x="114" y="550"/>
+      <point x="73" y="520"/>
+      <point x="5" y="520" type="curve" smooth="yes"/>
+      <point x="-21" y="520" type="line"/>
+      <point x="-30" y="479" type="line"/>
+    </contour>
+  </outline>
+</glyph>

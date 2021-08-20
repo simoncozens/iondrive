@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Desoft-cy" format="2">
+  <advance width="912"/>
+  <unicode hex="A662"/>
+  <outline>
+    <contour>
+      <point x="888" y="714" type="line"/>
+      <point x="489" y="714" type="line"/>
+      <point x="489" y="0" type="line"/>
+      <point x="579" y="0" type="line"/>
+      <point x="579" y="637" type="line"/>
+      <point x="888" y="637" type="line"/>
+    </contour>
+    <component base="De-cy"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.ComponentInfo</key>
+      <array>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>0</integer>
+          <key>name</key>
+          <string>De-cy</string>
+        </dict>
+      </array>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>Gamma</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

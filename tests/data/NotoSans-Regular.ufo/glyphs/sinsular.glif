@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="sinsular" format="2">
+  <advance width="415"/>
+  <unicode hex="A785"/>
+  <anchor x="208" y="-240" name="bottom"/>
+  <anchor x="208" y="536" name="top"/>
+  <outline>
+    <contour>
+      <point x="332" y="547" type="curve" smooth="yes"/>
+      <point x="257" y="547"/>
+      <point x="208" y="508"/>
+      <point x="171" y="443" type="curve"/>
+      <point x="166" y="443" type="line"/>
+      <point x="155" y="537" type="line"/>
+      <point x="85" y="537" type="line"/>
+      <point x="85" y="-240" type="line"/>
+      <point x="173" y="-240" type="line"/>
+      <point x="173" y="287" type="line" smooth="yes"/>
+      <point x="173" y="393"/>
+      <point x="236" y="465"/>
+      <point x="326" y="465" type="curve" smooth="yes"/>
+      <point x="346" y="465"/>
+      <point x="368" y="462"/>
+      <point x="386" y="458" type="curve"/>
+      <point x="395" y="541" type="line"/>
+      <point x="375" y="545"/>
+      <point x="351" y="547"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

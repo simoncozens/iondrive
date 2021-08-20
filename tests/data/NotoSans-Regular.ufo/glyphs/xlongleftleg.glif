@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="xlongleftleg" format="2">
+  <advance width="530"/>
+  <unicode hex="AB57"/>
+  <outline>
+    <contour>
+      <point x="212" y="270" type="line"/>
+      <point x="-129" y="-240" type="line"/>
+      <point x="-30" y="-240" type="line"/>
+      <point x="269" y="212" type="line"/>
+      <point x="411" y="0" type="line"/>
+      <point x="512" y="0" type="line"/>
+      <point x="320" y="275" type="line"/>
+      <point x="501" y="537" type="line"/>
+      <point x="402" y="537" type="line"/>
+      <point x="265" y="333" type="line"/>
+      <point x="127" y="537" type="line"/>
+      <point x="27" y="537" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="zstroke" format="2">
+  <advance width="470"/>
+  <unicode hex="01B6"/>
+  <anchor x="235" y="0" name="bottom"/>
+  <anchor x="235" y="536" name="top"/>
+  <outline>
+    <contour>
+      <point x="424" y="536" type="line"/>
+      <point x="56" y="536" type="line"/>
+      <point x="56" y="468" type="line"/>
+      <point x="327" y="468" type="line"/>
+      <point x="218" y="313" type="line"/>
+      <point x="57" y="313" type="line"/>
+      <point x="57" y="243" type="line"/>
+      <point x="169" y="243" type="line"/>
+      <point x="39" y="58" type="line"/>
+      <point x="39" y="0" type="line"/>
+      <point x="431" y="0" type="line"/>
+      <point x="431" y="68" type="line"/>
+      <point x="140" y="68" type="line"/>
+      <point x="263" y="243" type="line"/>
+      <point x="414" y="243" type="line"/>
+      <point x="414" y="313" type="line"/>
+      <point x="313" y="313" type="line"/>
+      <point x="424" y="470" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

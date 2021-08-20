@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="alphadasiaoxia.sc.ss06" format="2">
+  <advance width="528"/>
+  <outline>
+    <component base="alpha.sc"/>
+    <component base="dasiaoxia.sc" xOffset="29" yOffset="36"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>public.markColor</key>
+      <string>0.5,0.09,0.79,1</string>
+    </dict>
+  </lib>
+</glyph>

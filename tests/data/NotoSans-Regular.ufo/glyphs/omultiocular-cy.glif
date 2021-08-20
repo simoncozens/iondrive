@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="omultiocular-cy" format="2">
+  <advance width="881"/>
+  <unicode hex="A66E"/>
+  <outline>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="519" yOffset="136"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="16" yOffset="136"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="393" yOffset="402"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="267" yOffset="136"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="142" yOffset="402"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="393" yOffset="-131"/>
+    <component base="Omonocular-cy" xScale="0.444" yScale="0.444" xOffset="142" yOffset="-131"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.ComponentInfo</key>
+      <array>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>0</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>1</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>2</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>3</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>4</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>5</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>6</integer>
+          <key>name</key>
+          <string>Omonocular-cy</string>
+        </dict>
+      </array>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Other</string>
+    </dict>
+  </lib>
+</glyph>

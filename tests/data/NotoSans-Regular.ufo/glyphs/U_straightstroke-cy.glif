@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Ustraightstroke-cy" format="2">
+  <advance width="566"/>
+  <unicode hex="04B0"/>
+  <anchor x="283" y="0" name="bottom"/>
+  <anchor x="283" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="238" y="0" type="line"/>
+      <point x="328" y="0" type="line"/>
+      <point x="328" y="170" type="line"/>
+      <point x="475" y="170" type="line"/>
+      <point x="475" y="249" type="line"/>
+      <point x="328" y="249" type="line"/>
+      <point x="328" y="277" type="line"/>
+      <point x="566" y="714" type="line"/>
+      <point x="469" y="714" type="line"/>
+      <point x="283" y="363" type="line"/>
+      <point x="98" y="714" type="line"/>
+      <point x="0" y="714" type="line"/>
+      <point x="238" y="273" type="line"/>
+      <point x="238" y="249" type="line"/>
+      <point x="90" y="249" type="line"/>
+      <point x="90" y="170" type="line"/>
+      <point x="238" y="170" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

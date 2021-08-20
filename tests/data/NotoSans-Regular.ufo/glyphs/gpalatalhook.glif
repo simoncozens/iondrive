@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="gpalatalhook" format="2">
+  <advance width="780"/>
+  <unicode hex="1D83"/>
+  <outline>
+    <contour>
+      <point x="517" y="123" type="line"/>
+      <point x="517" y="53" type="line"/>
+      <point x="677" y="53" type="line"/>
+      <point x="677" y="-66" type="line" smooth="yes"/>
+      <point x="677" y="-102"/>
+      <point x="659" y="-118"/>
+      <point x="629" y="-118" type="curve" smooth="yes"/>
+      <point x="608" y="-118"/>
+      <point x="590" y="-113"/>
+      <point x="579" y="-109" type="curve"/>
+      <point x="579" y="-182" type="line"/>
+      <point x="592" y="-187"/>
+      <point x="614" y="-194"/>
+      <point x="639" y="-194" type="curve" smooth="yes"/>
+      <point x="719" y="-194"/>
+      <point x="756" y="-147"/>
+      <point x="756" y="-61" type="curve" smooth="yes"/>
+      <point x="756" y="123" type="line"/>
+    </contour>
+    <component base="g"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.ComponentInfo</key>
+      <array>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>0</integer>
+          <key>name</key>
+          <string>g</string>
+        </dict>
+      </array>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

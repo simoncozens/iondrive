@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Dmiddlestroke" format="2">
+  <advance width="730"/>
+  <unicode hex="A7C7"/>
+  <outline>
+    <contour>
+      <point x="137" y="333" type="line"/>
+      <point x="612" y="333" type="line"/>
+      <point x="612" y="402" type="line"/>
+      <point x="137" y="402" type="line"/>
+    </contour>
+    <component base="D"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.glyph.leftMetricsKey</key>
+      <string>D</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>D</string>
+    </dict>
+  </lib>
+</glyph>

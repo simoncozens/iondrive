@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Elmiddlehook-cy" format="2">
+  <advance width="1009"/>
+  <unicode hex="0520"/>
+  <anchor x="505" y="-250" name="bottom"/>
+  <anchor x="505" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="709" y="-250" type="curve" smooth="yes"/>
+      <point x="864" y="-250"/>
+      <point x="973" y="-144"/>
+      <point x="973" y="71" type="curve" smooth="yes"/>
+      <point x="973" y="269"/>
+      <point x="862" y="392"/>
+      <point x="660" y="392" type="curve" smooth="yes"/>
+      <point x="627" y="392"/>
+      <point x="586" y="390"/>
+      <point x="561" y="386" type="curve"/>
+      <point x="561" y="714" type="line"/>
+      <point x="221" y="714" type="line"/>
+      <point x="192" y="492"/>
+      <point x="164" y="303"/>
+      <point x="148" y="223" type="curve" smooth="yes"/>
+      <point x="132" y="145"/>
+      <point x="115" y="64"/>
+      <point x="56" y="64" type="curve" smooth="yes"/>
+      <point x="35" y="64"/>
+      <point x="16" y="69"/>
+      <point x="1" y="76" type="curve"/>
+      <point x="1" y="1" type="line"/>
+      <point x="19" y="-6"/>
+      <point x="43" y="-11"/>
+      <point x="66" y="-11" type="curve" smooth="yes"/>
+      <point x="168" y="-11"/>
+      <point x="204" y="63"/>
+      <point x="231" y="198" type="curve" smooth="yes"/>
+      <point x="252" y="302"/>
+      <point x="277" y="487"/>
+      <point x="297" y="635" type="curve"/>
+      <point x="471" y="635" type="line"/>
+      <point x="471" y="0" type="line"/>
+      <point x="561" y="0" type="line"/>
+      <point x="561" y="306" type="line"/>
+      <point x="581" y="311"/>
+      <point x="626" y="313"/>
+      <point x="654" y="313" type="curve" smooth="yes"/>
+      <point x="798" y="313"/>
+      <point x="879" y="232"/>
+      <point x="879" y="72" type="curve" smooth="yes"/>
+      <point x="879" y="-85"/>
+      <point x="816" y="-170"/>
+      <point x="697" y="-170" type="curve" smooth="yes"/>
+      <point x="651" y="-170"/>
+      <point x="611" y="-161"/>
+      <point x="570" y="-146" type="curve"/>
+      <point x="570" y="-226" type="line"/>
+      <point x="610" y="-241"/>
+      <point x="646" y="-250"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>Ghemiddlehook-cy</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

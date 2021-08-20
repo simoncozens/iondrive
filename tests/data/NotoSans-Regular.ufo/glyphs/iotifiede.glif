@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="iotifiede" format="2">
+  <advance width="822"/>
+  <unicode hex="AB61"/>
+  <outline>
+    <contour>
+      <point x="338" y="244" type="line"/>
+      <point x="339" y="314" type="line"/>
+      <point x="171" y="314" type="line"/>
+      <point x="171" y="537" type="line"/>
+      <point x="83" y="537" type="line"/>
+      <point x="83" y="0" type="line"/>
+      <point x="171" y="0" type="line"/>
+      <point x="171" y="244" type="line"/>
+    </contour>
+    <component base="e" xOffset="258"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.ComponentInfo</key>
+      <array>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>0</integer>
+          <key>name</key>
+          <string>e</string>
+        </dict>
+      </array>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>e</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Qsmall" format="2">
+  <advance width="632"/>
+  <unicode hex="A7AF"/>
+  <anchor x="316.956" y="-138.937" name="bottom"/>
+  <anchor x="316.956" y="573.137" name="top"/>
+  <anchor x="614.996" y="573.137" name="topright"/>
+  <outline>
+    <contour>
+      <point x="393" y="40" type="line"/>
+      <point x="306" y="27" type="line"/>
+      <point x="448" y="-139" type="line"/>
+      <point x="562" y="-139" type="line"/>
+    </contour>
+    <component base="o.sc"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>
