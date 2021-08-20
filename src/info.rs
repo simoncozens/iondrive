@@ -5,7 +5,6 @@ use norad::IntegerOrFloat;
 use norad::NonNegativeIntegerOrFloat;
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
-use pyo3::types::PyList;
 
 impl MyToPyObject for StyleMapStyle {
     fn to_object(&self, py: Python) -> PyObject {
@@ -103,14 +102,7 @@ impl ToWrappedPyObject for norad::FontInfo {
             ("copyright", self.copyright.to_object(py)),
             ("descender", self.descender.to_object(py)),
             ("familyName", self.family_name.to_object(py)),
-            (
-                "guidelines",
-                self.guidelines
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |v| {
-                        v.to_wrapped_object(loader, py)
-                    }),
-            ),
+            ("guidelines", self.guidelines.to_wrapped_object(loader, py)),
             ("italicAngle", self.italic_angle.to_object(py)),
             (
                 "macintoshFONDFamilyID",
@@ -447,7 +439,7 @@ impl ToWrappedPyObject for norad::FontInfo {
     }
 }
 
-// TODO: Wrap all WOFF attributes.
+// TODO: Wrap all WOFF attributes. ufoLib2 does at the time of this writing not support them.
 
 //     // #[getter]
 //     // fn woffMetadataCopyright(&self) -> Option<WoffMetadataCopyright> {
