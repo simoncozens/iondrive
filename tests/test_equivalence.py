@@ -9,6 +9,8 @@ import iondrive
 UFOS = [
     Path("tests/data/MutatorSansBoldCondensed.ufo"),
     Path("tests/data/UbuTestData.ufo"),
+    Path("tests/data/SourceSans_ExtraLight.ufo"),
+    Path("tests/data/NotoSans-Regular.ufo"),
 ]
 
 
@@ -37,7 +39,6 @@ def test_equivalence(path: Path) -> None:
         assert layer.keys() == id_layer.keys()
         for glyph_name in layer.keys():
             # Compare fields one by one so we can use approximate equal comparisons.
-            # Expand as necessary.
             glyph = layer[glyph_name]
             id_glyph = id_layer[glyph_name]
             assert glyph.name == id_glyph.name
@@ -47,8 +48,24 @@ def test_equivalence(path: Path) -> None:
             assert glyph.image == id_glyph.image
             assert glyph.lib == id_glyph.lib
             assert glyph.note == id_glyph.note
-            assert glyph.anchors == id_glyph.anchors
-            assert glyph.components == id_glyph.components
+            assert len(glyph.anchors) == len(id_glyph.anchors)
+            for anchor, id_anchor in zip(glyph.anchors, id_glyph.anchors):
+                assert anchor.name == id_anchor.name
+                assert close_enough(anchor.x, id_anchor.x)
+                assert close_enough(anchor.y, id_anchor.y)
+                assert anchor.color == id_anchor.color
+                assert anchor.identifier == id_anchor.identifier
+            assert len(glyph.components) == len(id_glyph.components)
+            for component, id_component in zip(glyph.components, id_glyph.components):
+                assert component.baseGlyph == id_component.baseGlyph
+                assert component.identifier == id_component.identifier
+                t, id_t = component.transformation, id_component.transformation
+                assert close_enough(t.xx, id_t.xx)
+                assert close_enough(t.xy, id_t.xy)
+                assert close_enough(t.yx, id_t.yx)
+                assert close_enough(t.yy, id_t.yy)
+                assert close_enough(t.dx, id_t.dx)
+                assert close_enough(t.dy, id_t.dy)
             assert len(glyph.contours) == len(id_glyph.contours)
             for contour, id_contour in zip(glyph.contours, id_glyph.contours):
                 assert contour.identifier == id_contour.identifier
