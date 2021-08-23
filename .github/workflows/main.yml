@@ -11,13 +11,13 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest, macOS-latest, windows-latest]
+        platform: [macOS-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Rust environment
+      - name: Set up Rust environment
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -27,21 +27,50 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: Set up rust-cargo
+      - name: Set up cargo
         uses: actions-rs/cargo@v1
         with:
           command: test
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install cffi maturin pytest ufoLib2 .
+          pip install -r requirements-dev.txt .
       - name: Build release wheels
         run: |
           maturin build --release
       - name: Test
-        run: pytest
-      - uses: actions/upload-artifact@v2
-        name: upload-wheel
+        run: |
+          maturin develop --release
+          pytest
+      - name: Upload wheels
+        uses: actions/upload-artifact@v2
         with:
           name: wheel-${{ matrix.platform }}
+          path: target/wheels/
+
+  build-manylinux:
+    runs-on: ubuntu-latest
+    container:
+      image: konstin2/maturin:master
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1  # v2 does not run in the image.
+      - name: Set up Rust environment
+        run: |
+          rustup default 1.41.0
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements-dev.txt .
+      - name: Build release wheels
+        run: |
+          maturin build --release
+      - name: Test
+        run: |
+          maturin develop --release
+          pytest
+      - name: Upload wheels
+        uses: actions/upload-artifact@v1  # v2 does not run in the image.
+        with:
+          name: wheel-manylinux
           path: target/wheels/
