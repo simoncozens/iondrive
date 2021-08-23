@@ -2,22 +2,22 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags: ["v*.*.*"]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest, macOS-latest, windows-latest]
+        platform: [macOS-latest, windows-latest]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     runs-on: ${{ matrix.platform }}
-
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Rust environment
+      - name: Set up Rust environment
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -26,22 +26,58 @@ jobs:
       - name: Setup Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
-      - name: Set up rust-cargo
+          python-version: ${{ matrix.python-version }}
+      - name: Set up cargo
         uses: actions-rs/cargo@v1
         with:
           command: test
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install cffi maturin pytest ufoLib2 .
+          pip install -r requirements-dev.txt .
+      - name: Build release wheels (Windows)
+        if: contains(matrix.platform, 'windows')
+        run: |
+          maturin build --release --no-sdist --interpreter (Get-Command python)
+      - name: Build release wheels (macOS)
+        if: contains(matrix.platform, 'macOS')
+        run: |
+          maturin build --release --no-sdist --interpreter `which python3`
+      - name: Test
+        run: |
+          pip install iondrive --no-index --find-links target/wheels --force-reinstall
+          pytest
+      - name: Upload wheels
+        uses: actions/upload-artifact@v2
+        with:
+          name: wheel-${{ matrix.platform }}
+          path: target/wheels/
+
+  build-manylinux:
+    runs-on: ubuntu-latest
+    container:
+      image: konstin2/maturin:master
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1  # v2 does not run in the image.
+      - name: Set up Rust environment
+        run: |
+          rustup default 1.41.0
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements-dev.txt .
       - name: Build release wheels
+        # This makes wheels for all Pythons.
         run: |
           maturin build --release
       - name: Test
-        run: pytest
-      - uses: actions/upload-artifact@v2
-        name: upload-wheel
+        # This just tests one wheel that's appropriate for the Python version.
+        run: |
+          pip install iondrive --no-index --find-links target/wheels --force-reinstall
+          pytest
+      - name: Upload wheels
+        uses: actions/upload-artifact@v1  # v2 does not run in the image.
         with:
-          name: wheel-${{ matrix.platform }}
+          name: wheel-manylinux
           path: target/wheels/
