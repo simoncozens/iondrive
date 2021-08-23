@@ -38,7 +38,7 @@ jobs:
       - name: Build release wheels (Windows)
         if: contains(matrix.platform, 'windows')
         run: |
-          maturin build --release --no-sdist --interpreter py
+          maturin build --release --no-sdist --interpreter (Get-Command python)
       - name: Build release wheels (macOS)
         if: contains(matrix.platform, 'macOS')
         run: |
@@ -68,9 +68,11 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements-dev.txt .
       - name: Build release wheels
+        # This makes wheels for all Pythons.
         run: |
           maturin build --release
       - name: Test
+        # This just tests one wheel that's appropriate for the Python version.
         run: |
           pip install iondrive --no-index --find-links target/wheels --force-reinstall
           pytest
