@@ -14,7 +14,7 @@ jobs:
       image: konstin2/maturin:master
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
       - name: maturin-build
         run: |
           rustup default 1.41.0
