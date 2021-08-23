@@ -1,11 +1,15 @@
+use std::collections::BTreeMap;
+use std::path::Path;
+use std::path::PathBuf;
+use std::sync::Arc;
+
+use pyo3::create_exception;
+use pyo3::exceptions::PyException;
+use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
 use pyo3::types::PyDict;
-use pyo3::types::PyList;
+use pyo3::wrap_pyfunction;
 
-use std::collections::BTreeMap;
-use std::ffi::OsStr;
-use std::path::Path;
-use std::sync::Arc;
 mod anchor;
 mod component;
 mod contour;
@@ -13,13 +17,6 @@ mod contourpoint;
 mod guideline;
 mod info;
 mod plist;
-
-use pyo3::exceptions::PyValueError;
-use pyo3::prelude::*;
-use pyo3::types::PyUnicode;
-use pyo3::wrap_pyfunction;
-
-static DEFAULT_GLYPHS_DIRNAME: &str = "glyphs";
 
 trait ToWrappedPyObject {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject;
@@ -94,85 +91,46 @@ where
 
 impl ToWrappedPyObject for Arc<norad::Glyph> {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Glyph").unwrap();
+        let cls = loader.getattr("Glyph").unwrap();
         let kwargs = [
             ("name", self.name.to_object(py)),
-            ("width", self.advance_width().unwrap_or(0.0).to_object(py)),
+            ("width", self.width.to_object(py)),
             (
                 "unicodes",
                 self.codepoints
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |cp| {
-                        cp.iter()
-                            .map(|l| (*l as u32).to_object(py))
-                            .collect::<Vec<PyObject>>()
-                            .to_object(py)
-                    }),
+                    .iter()
+                    .map(|l| (*l as u32).to_object(py))
+                    .collect::<Vec<PyObject>>()
+                    .to_object(py),
             ),
-            (
-                "lib",
-                self.lib
-                    .as_ref()
-                    .map_or(PyDict::new(py).to_object(py), |l| l.to_object(py)),
-            ),
+            ("lib", self.lib.to_object(py)),
             ("note", self.note.to_object(py)),
-            (
-                "anchors",
-                self.anchors
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |a| {
-                        a.to_wrapped_object(loader, py)
-                    }),
-            ),
-            (
-                "contours",
-                self.outline
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |c| {
-                        c.contours.to_wrapped_object(loader, py)
-                    }),
-            ),
-            (
-                "components",
-                self.outline
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |c| {
-                        c.components.to_wrapped_object(loader, py)
-                    }),
-            ),
-            (
-                "guidelines",
-                self.guidelines
-                    .as_ref()
-                    .map_or(PyList::empty(py).to_object(py), |g| {
-                        g.to_wrapped_object(loader, py)
-                    }),
-            ),
+            ("anchors", self.anchors.to_wrapped_object(loader, py)),
+            ("contours", self.contours.to_wrapped_object(loader, py)),
+            ("components", self.components.to_wrapped_object(loader, py)),
+            ("guidelines", self.guidelines.to_wrapped_object(loader, py)),
         ]
         .into_py_dict(py);
         cls.call((), Some(kwargs)).unwrap().into()
     }
 }
 
-impl ToWrappedPyObject for norad::LayerInfo {
+impl ToWrappedPyObject for norad::Layer {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Layer").unwrap();
+        let cls = loader.getattr("Layer").unwrap();
         let kwargs = [
-            ("name", self.name.to_object(py)),
+            ("name", self.name().to_object(py)),
             (
                 "glyphs",
-                self.layer
-                    .iter_contents()
+                self.iter()
                     .map(|l| l.to_wrapped_object(loader, py))
                     .collect::<Vec<PyObject>>()
                     .to_object(py),
             ),
-            // ("lib", self.layer.lib.to_object(py)),
+            ("lib", self.lib.to_object(py)),
             (
                 "color",
-                self.layer
-                    .info
-                    .color
+                self.color
                     .as_ref()
                     .map(|c| c.to_rgba_string())
                     .to_object(py),
@@ -183,52 +141,59 @@ impl ToWrappedPyObject for norad::LayerInfo {
     }
 }
 
-fn wrap_layerset(
-    layers: &Vec<norad::LayerInfo>,
-    default_layer_name: Option<&String>,
-    loader: &PyModule,
-    py: Python,
-) -> PyObject {
-    let cls = loader.get("LayerSet").unwrap();
+fn wrap_layerset(layers: &norad::LayerSet, loader: &PyModule, py: Python) -> PyObject {
+    let wrapped_layers: Vec<PyObject> = layers
+        .iter()
+        .map(|l| l.to_wrapped_object(loader, py))
+        .collect();
+
+    let cls = loader.getattr("LayerSet").unwrap();
     cls.call_method(
         "from_iterable",
-        ((*layers).to_wrapped_object(loader, py), default_layer_name),
+        (wrapped_layers, layers.default_layer().name().as_ref()),
         None,
     )
     .unwrap()
     .into()
 }
 
-fn wrap_kerning(kerning: Option<&BTreeMap<String, BTreeMap<String, f32>>>, py: Python) -> PyObject {
-    if kerning.is_none() {
-        return py.None();
-    }
-    let d = PyDict::new(py);
-    for (left, v) in kerning.unwrap().iter() {
-        for (right, kern) in v.iter() {
-            d.set_item((left, right).to_object(py), kern.to_object(py));
+fn wrap_kerning(kerning: Option<&norad::Kerning>, py: Python) -> PyObject {
+    match kerning {
+        Some(kerning) => {
+            let d = PyDict::new(py);
+            for (left, v) in kerning.iter() {
+                for (right, kern) in v.iter() {
+                    d.set_item((left, right).to_object(py), kern.to_object(py))
+                        .unwrap();
+                }
+            }
+            d.into()
         }
+        None => PyDict::new(py).into(),
     }
-    d.into()
 }
-impl ToWrappedPyObject for norad::Ufo {
+
+impl ToWrappedPyObject for norad::Font {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let font = loader.get("Font").unwrap();
-        let default_layer_name = self
-            .layers
-            .iter()
-            .find(|l| l.path.file_name() == Some(OsStr::new(DEFAULT_GLYPHS_DIRNAME)))
-            .map(|l| &l.name);
+        let font = loader.getattr("Font").unwrap();
 
         let kwargs = [
             ("lib", self.lib.to_object(py)),
-            (
-                "layers",
-                wrap_layerset(self.layers.as_ref(), default_layer_name, loader, py),
-            ),
+            ("layers", wrap_layerset(&self.layers, loader, py)),
             ("info", self.font_info.to_wrapped_object(loader, py)),
-            ("features", pyo3::ToPyObject::to_object(&self.features, py)),
-            ("groups", self.groups.to_object(py)),
+            (
+                "features",
+                self.features
+                    .as_ref()
+                    .map_or("", |v| v.as_str())
+                    .to_object(py),
+            ),
+            (
+                "groups",
+                self.groups
+                    .as_ref()
+                    .map_or(PyDict::new(py).to_object(py), |v| v.to_object(py)),
+            ),
             ("kerning", wrap_kerning(self.kerning.as_ref(), py)),
         ]
         .into_py_dict(py);
@@ -236,20 +201,34 @@ impl ToWrappedPyObject for norad::Ufo {
     }
 }
 
+create_exception!(readwrite_ufo_glif, IondriveError, PyException);
+
+/// Load and return a UFO from `path`, using the objects from `font_objects_module`.
+///
+/// The font objects module is the Python namespace containing the classes as
+/// exported by ufoLib2, typically this will be the module `ufoLib2.objects`.
 #[pyfunction]
-fn load(loader: &PyModule, path: &PyUnicode) -> PyResult<PyObject> {
+#[pyo3(text_signature = "(font_objects_module, path, /)")]
+fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
-    let s: String = path.extract()?;
-    match norad::Ufo::load(Path::new(&s)) {
+    match norad::Font::load(Path::new(&path)) {
         Ok(ufo) => Ok(ufo.to_wrapped_object(loader, py)),
-        Err(error) => Err(PyValueError::new_err(error.to_string())),
+        Err(error) => Err(IondriveError::new_err(error.to_string())),
     }
 }
 
+/// Iondrive is a glue library to load [Unified Font Object](ufo) files using norad.
+///
+/// The goal is to load data faster than can be done by Python and then pass it
+/// over to Python.
+///
+/// [ufo]: https://unifiedfontobject.org/
 #[pymodule]
-fn iondrive(_py: Python, m: &PyModule) -> PyResult<()> {
+fn iondrive(py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(load, m)?).unwrap();
+
+    m.add("IondriveError", py.get_type::<IondriveError>())?;
 
     Ok(())
 }

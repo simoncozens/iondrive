@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Ldoublebar" format="2">
+  <advance width="524"/>
+  <unicode hex="2C60"/>
+  <anchor x="262" y="0" name="bottom"/>
+  <anchor x="262" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="97" y="0" type="line"/>
+      <point x="499" y="0" type="line"/>
+      <point x="499" y="80" type="line"/>
+      <point x="187" y="80" type="line"/>
+      <point x="187" y="222" type="line"/>
+      <point x="357" y="222" type="line"/>
+      <point x="357" y="293" type="line"/>
+      <point x="187" y="293" type="line"/>
+      <point x="187" y="382" type="line"/>
+      <point x="357" y="382" type="line"/>
+      <point x="357" y="453" type="line"/>
+      <point x="187" y="453" type="line"/>
+      <point x="187" y="714" type="line"/>
+      <point x="97" y="714" type="line"/>
+      <point x="97" y="453" type="line"/>
+      <point x="10" y="453" type="line"/>
+      <point x="10" y="382" type="line"/>
+      <point x="97" y="382" type="line"/>
+      <point x="97" y="293" type="line"/>
+      <point x="10" y="293" type="line"/>
+      <point x="10" y="222" type="line"/>
+      <point x="97" y="222" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

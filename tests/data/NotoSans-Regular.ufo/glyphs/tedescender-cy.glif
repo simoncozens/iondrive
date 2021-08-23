@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="tedescender-cy" format="2">
+  <advance width="475"/>
+  <unicode hex="04AD"/>
+  <anchor x="238" y="-185" name="bottom"/>
+  <anchor x="238" y="536" name="top"/>
+  <outline>
+    <contour>
+      <point x="454" y="536" type="line"/>
+      <point x="20" y="536" type="line"/>
+      <point x="20" y="463" type="line"/>
+      <point x="193" y="463" type="line"/>
+      <point x="193" y="0" type="line"/>
+      <point x="273" y="0" type="line"/>
+      <point x="273" y="-185" type="line"/>
+      <point x="359" y="-185" type="line"/>
+      <point x="359" y="73" type="line"/>
+      <point x="280" y="73" type="line"/>
+      <point x="280" y="463" type="line"/>
+      <point x="454" y="463" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Lowercase</string>
+    </dict>
+  </lib>
+</glyph>

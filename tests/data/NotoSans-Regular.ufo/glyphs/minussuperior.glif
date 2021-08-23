@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="minussuperior" format="2">
+  <advance width="338"/>
+  <unicode hex="207B"/>
+  <outline>
+    <contour>
+      <point x="35" y="569" type="line"/>
+      <point x="303" y="569" type="line"/>
+      <point x="303" y="621" type="line"/>
+      <point x="35" y="621" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Symbol</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Math</string>
+    </dict>
+  </lib>
+</glyph>

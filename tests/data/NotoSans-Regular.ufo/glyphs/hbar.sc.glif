@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="hbar.sc" format="2">
+  <advance width="599"/>
+  <anchor x="300" y="0" name="bottom"/>
+  <anchor x="300" y="572" name="top"/>
+  <outline>
+    <contour>
+      <point x="595" y="421" type="line"/>
+      <point x="595" y="484" type="line"/>
+      <point x="525" y="484" type="line"/>
+      <point x="525" y="572" type="line"/>
+      <point x="438" y="572" type="line"/>
+      <point x="438" y="484" type="line"/>
+      <point x="162" y="484" type="line"/>
+      <point x="162" y="572" type="line"/>
+      <point x="75" y="572" type="line"/>
+      <point x="75" y="484" type="line"/>
+      <point x="5" y="484" type="line"/>
+      <point x="5" y="421" type="line"/>
+      <point x="75" y="421" type="line"/>
+      <point x="75" y="0" type="line"/>
+      <point x="162" y="0" type="line"/>
+      <point x="162" y="256" type="line"/>
+      <point x="438" y="256" type="line"/>
+      <point x="438" y="0" type="line"/>
+      <point x="525" y="0" type="line"/>
+      <point x="525" y="421" type="line"/>
+    </contour>
+    <contour>
+      <point x="438" y="326" type="line"/>
+      <point x="162" y="326" type="line"/>
+      <point x="162" y="421" type="line"/>
+      <point x="438" y="421" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Smallcaps</string>
+    </dict>
+  </lib>
+</glyph>

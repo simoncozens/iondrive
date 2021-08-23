@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Twe-cy" format="2">
+  <advance width="546"/>
+  <unicode hex="A68C"/>
+  <outline>
+    <contour>
+      <point x="225" y="200" type="line"/>
+      <point x="225" y="55"/>
+      <point x="291" y="-10"/>
+      <point x="402" y="-10" type="curve" smooth="yes"/>
+      <point x="434" y="-10"/>
+      <point x="458" y="-6"/>
+      <point x="477" y="2" type="curve"/>
+      <point x="477" y="78" type="line"/>
+      <point x="455" y="72"/>
+      <point x="434" y="68"/>
+      <point x="411" y="68" type="curve" smooth="yes"/>
+      <point x="351" y="68"/>
+      <point x="315" y="103"/>
+      <point x="315" y="197" type="curve" smooth="yes"/>
+      <point x="315" y="636" type="line"/>
+      <point x="535" y="636" type="line"/>
+      <point x="535" y="714" type="line"/>
+      <point x="11" y="714" type="line"/>
+      <point x="11" y="636" type="line"/>
+      <point x="225" y="636" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

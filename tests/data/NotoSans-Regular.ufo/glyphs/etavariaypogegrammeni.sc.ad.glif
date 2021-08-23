@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="etavariaypogegrammeni.sc.ad" format="2">
+  <advance width="890"/>
+  <outline>
+    <component base="eta.sc"/>
+    <component base="i.sc" xOffset="599"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>public.markColor</key>
+      <string>0.5,0.09,0.79,1</string>
+    </dict>
+  </lib>
+</glyph>

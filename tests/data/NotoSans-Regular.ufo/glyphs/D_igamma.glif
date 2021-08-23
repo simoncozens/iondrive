@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Digamma" format="2">
+  <advance width="509"/>
+  <unicode hex="03DC"/>
+  <outline>
+    <contour>
+      <point x="97" y="0" type="line"/>
+      <point x="187" y="0" type="line"/>
+      <point x="187" y="303" type="line"/>
+      <point x="376" y="303" type="line"/>
+      <point x="376" y="175" type="line"/>
+      <point x="462" y="175" type="line"/>
+      <point x="462" y="382" type="line"/>
+      <point x="187" y="382" type="line"/>
+      <point x="187" y="635" type="line"/>
+      <point x="486" y="635" type="line"/>
+      <point x="486" y="714" type="line"/>
+      <point x="97" y="714" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.leftMetricsKey</key>
+      <string>=F</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>=F</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>greek</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+      <key>public.markColor</key>
+      <string>0.04,0.57,0.04,1</string>
+    </dict>
+  </lib>
+</glyph>

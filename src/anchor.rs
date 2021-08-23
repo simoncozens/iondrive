@@ -4,7 +4,7 @@ use pyo3::types::IntoPyDict;
 
 impl ToWrappedPyObject for norad::Anchor {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let cls = loader.get("Anchor").unwrap();
+        let cls = loader.getattr("Anchor").unwrap();
         let kwargs = [
             ("x", self.x.to_object(py)),
             ("y", self.y.to_object(py)),

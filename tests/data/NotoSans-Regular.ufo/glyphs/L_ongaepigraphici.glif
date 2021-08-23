@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Longaepigraphici" format="2">
+  <advance width="339"/>
+  <unicode hex="A7FE"/>
+  <outline>
+    <contour>
+      <point x="298" y="0" type="line"/>
+      <point x="298" y="52" type="line"/>
+      <point x="214" y="71" type="line"/>
+      <point x="214" y="857" type="line"/>
+      <point x="298" y="877" type="line"/>
+      <point x="298" y="929" type="line"/>
+      <point x="40" y="929" type="line"/>
+      <point x="40" y="877" type="line"/>
+      <point x="124" y="857" type="line"/>
+      <point x="124" y="71" type="line"/>
+      <point x="40" y="52" type="line"/>
+      <point x="40" y="0" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Other</string>
+    </dict>
+  </lib>
+</glyph>

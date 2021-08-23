@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="ustroke" format="2">
+  <advance width="618"/>
+  <unicode hex="A7B9"/>
+  <outline>
+    <contour>
+      <point x="99" y="-38" type="line"/>
+      <point x="579" y="521" type="line"/>
+      <point x="526" y="566" type="line"/>
+      <point x="46" y="6" type="line"/>
+    </contour>
+    <component base="u"/>
+  </outline>
+</glyph>

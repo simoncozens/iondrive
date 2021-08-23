@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Jcrossedtail" format="2">
+  <advance width="289"/>
+  <unicode hex="A7B2"/>
+  <outline>
+    <contour>
+      <point x="198" y="11" type="curve" smooth="yes"/>
+      <point x="198" y="714" type="line"/>
+      <point x="108" y="714" type="line"/>
+      <point x="108" y="-7" type="line" smooth="yes"/>
+      <point x="108" y="-88"/>
+      <point x="75" y="-130"/>
+      <point x="27" y="-130" type="curve" smooth="yes"/>
+      <point x="-9" y="-130"/>
+      <point x="-25" y="-110"/>
+      <point x="-25" y="-80" type="curve" smooth="yes"/>
+      <point x="-25" y="-50"/>
+      <point x="-5" y="-25"/>
+      <point x="37" y="-25" type="curve" smooth="yes"/>
+      <point x="102" y="-25"/>
+      <point x="165" y="-94"/>
+      <point x="202" y="-196" type="curve"/>
+      <point x="258" y="-176" type="line"/>
+      <point x="211" y="-54"/>
+      <point x="130" y="33"/>
+      <point x="28" y="33" type="curve" smooth="yes"/>
+      <point x="-44" y="33"/>
+      <point x="-91" y="-9"/>
+      <point x="-91" y="-80" type="curve" smooth="yes"/>
+      <point x="-91" y="-150"/>
+      <point x="-41" y="-192"/>
+      <point x="34" y="-192" type="curve" smooth="yes"/>
+      <point x="149" y="-192"/>
+      <point x="198" y="-102"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

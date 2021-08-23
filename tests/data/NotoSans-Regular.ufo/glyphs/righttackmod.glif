@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="righttackmod" format="2">
+  <advance width="300"/>
+  <unicode hex="AB6B"/>
+  <outline>
+    <contour>
+      <point x="240" y="318" type="line"/>
+      <point x="140" y="318" type="line"/>
+      <point x="140" y="390" type="line"/>
+      <point x="80" y="390" type="line"/>
+      <point x="80" y="180" type="line"/>
+      <point x="140" y="180" type="line"/>
+      <point x="140" y="252" type="line"/>
+      <point x="240" y="252" type="line"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.glyph.rightMetricsKey</key>
+      <string>=|uniAB6A</string>
+      <key>com.schriftgestaltung.Glyphs.glyph.widthMetricsKey</key>
+      <string>=300</string>
+    </dict>
+  </lib>
+</glyph>

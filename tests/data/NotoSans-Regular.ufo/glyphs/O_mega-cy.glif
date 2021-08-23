@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Omega-cy" format="2">
+  <advance width="919"/>
+  <unicode hex="0460"/>
+  <anchor x="460" y="0" name="bottom"/>
+  <anchor x="460" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="238" y="-5" type="curve"/>
+      <point x="323" y="-5" type="line"/>
+      <point x="458" y="376" type="line"/>
+      <point x="491" y="258"/>
+      <point x="557" y="99"/>
+      <point x="621" y="-5" type="curve"/>
+      <point x="701" y="-5" type="line"/>
+      <point x="823" y="189"/>
+      <point x="889" y="441"/>
+      <point x="894" y="714" type="curve"/>
+      <point x="800" y="714" type="line"/>
+      <point x="797" y="461"/>
+      <point x="745" y="251"/>
+      <point x="665" y="92" type="curve"/>
+      <point x="661" y="92" type="line"/>
+      <point x="586" y="241"/>
+      <point x="501" y="490"/>
+      <point x="493" y="714" type="curve"/>
+      <point x="400" y="714" type="line"/>
+      <point x="402" y="650"/>
+      <point x="411" y="575"/>
+      <point x="423" y="506" type="curve"/>
+      <point x="326" y="243" type="line" smooth="yes"/>
+      <point x="306" y="189"/>
+      <point x="290" y="136"/>
+      <point x="281" y="97" type="curve"/>
+      <point x="276" y="97" type="line"/>
+      <point x="213" y="234"/>
+      <point x="130" y="470"/>
+      <point x="118" y="714" type="curve"/>
+      <point x="25" y="714" type="line"/>
+      <point x="36" y="455"/>
+      <point x="128" y="185"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>cyrillic</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

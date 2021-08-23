@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="ringhalfright" format="2">
+  <advance width="169"/>
+  <unicode hex="02BE"/>
+  <outline>
+    <contour>
+      <point x="30" y="786" type="curve"/>
+      <point x="30" y="735" type="line"/>
+      <point x="66" y="735"/>
+      <point x="86" y="715"/>
+      <point x="86" y="680" type="curve" smooth="yes"/>
+      <point x="86" y="645"/>
+      <point x="62" y="625"/>
+      <point x="30" y="625" type="curve"/>
+      <point x="30" y="575" type="line"/>
+      <point x="95" y="575"/>
+      <point x="139" y="614"/>
+      <point x="139" y="680" type="curve" smooth="yes"/>
+      <point x="139" y="747"/>
+      <point x="95" y="786"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Mark</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string></string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Modifier</string>
+    </dict>
+  </lib>
+</glyph>

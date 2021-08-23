@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Tonesix" format="2">
+  <advance width="635"/>
+  <unicode hex="0184"/>
+  <anchor x="318" y="0" name="bottom"/>
+  <anchor x="318" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="341" y="-10" type="curve" smooth="yes"/>
+      <point x="505" y="-10"/>
+      <point x="584" y="79"/>
+      <point x="584" y="205" type="curve" smooth="yes"/>
+      <point x="584" y="318"/>
+      <point x="513" y="412"/>
+      <point x="314" y="412" type="curve" smooth="yes"/>
+      <point x="180" y="412" type="line"/>
+      <point x="180" y="714" type="line"/>
+      <point x="90" y="714" type="line"/>
+      <point x="90" y="210" type="line"/>
+      <point x="90" y="80"/>
+      <point x="154" y="-10"/>
+    </contour>
+    <contour>
+      <point x="340" y="67" type="curve" smooth="yes"/>
+      <point x="227" y="67"/>
+      <point x="180" y="106"/>
+      <point x="180" y="210" type="curve" smooth="yes"/>
+      <point x="180" y="334" type="line"/>
+      <point x="303" y="334" type="line" smooth="yes"/>
+      <point x="426" y="334"/>
+      <point x="491" y="297"/>
+      <point x="491" y="205" type="curve" smooth="yes"/>
+      <point x="491" y="116"/>
+      <point x="446" y="67"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Uhorn" format="2">
+  <advance width="780"/>
+  <unicode hex="01AF"/>
+  <anchor x="370" y="0" name="bottom"/>
+  <anchor x="366" y="714" name="top"/>
+  <outline>
+    <contour>
+      <point x="640" y="617" type="curve"/>
+      <point x="640" y="714" type="line"/>
+      <point x="551" y="714" type="line"/>
+      <point x="551" y="251" type="line" smooth="yes"/>
+      <point x="551" y="144"/>
+      <point x="501" y="68"/>
+      <point x="371" y="68" type="curve" smooth="yes"/>
+      <point x="243" y="68"/>
+      <point x="180" y="135"/>
+      <point x="180" y="250" type="curve" smooth="yes"/>
+      <point x="180" y="714" type="line"/>
+      <point x="90" y="714" type="line"/>
+      <point x="90" y="254" type="line" smooth="yes"/>
+      <point x="90" y="95"/>
+      <point x="187" y="-10"/>
+      <point x="369" y="-10" type="curve" smooth="yes"/>
+      <point x="560" y="-10"/>
+      <point x="640" y="104"/>
+      <point x="640" y="252" type="curve" smooth="yes"/>
+      <point x="640" y="555" type="line"/>
+      <point x="762" y="576"/>
+      <point x="801" y="654"/>
+      <point x="818" y="749" type="curve"/>
+      <point x="811" y="760" type="line"/>
+      <point x="718" y="760" type="line"/>
+      <point x="718" y="681"/>
+      <point x="705" y="627"/>
+    </contour>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.category</key>
+      <string>Letter</string>
+      <key>com.schriftgestaltung.Glyphs.script</key>
+      <string>latin</string>
+      <key>com.schriftgestaltung.Glyphs.subCategory</key>
+      <string>Uppercase</string>
+    </dict>
+  </lib>
+</glyph>

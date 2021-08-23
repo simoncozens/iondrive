@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="Omegapsilivariaprosgegrammeni.ad" format="2">
+  <advance width="1368"/>
+  <outline>
+    <component base="Omega" xOffset="305"/>
+    <component base="psilivaria.case" xOffset="-31"/>
+    <component base="prosgegrammeni" xOffset="1022"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.ComponentInfo</key>
+      <array>
+        <dict>
+          <key>alignment</key>
+          <integer>-1</integer>
+          <key>index</key>
+          <integer>0</integer>
+          <key>name</key>
+          <string>Omega</string>
+        </dict>
+      </array>
+      <key>public.markColor</key>
+      <string>0,0.67,0.91,1</string>
+    </dict>
+  </lib>
+</glyph>
