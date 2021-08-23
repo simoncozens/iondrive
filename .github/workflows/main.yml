@@ -40,7 +40,7 @@ jobs:
           maturin build --release
       - name: Test
         run: |
-          maturin develop --release
+          pip install iondrive --no-index --find-links dist --force-reinstall
           pytest
       - name: Upload wheels
         uses: actions/upload-artifact@v2
@@ -67,7 +67,7 @@ jobs:
           maturin build --release
       - name: Test
         run: |
-          maturin develop --release
+          pip install iondrive --no-index --find-links dist --force-reinstall
           pytest
       - name: Upload wheels
         uses: actions/upload-artifact@v1  # v2 does not run in the image.
