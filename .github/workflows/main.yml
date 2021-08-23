@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         platform: [macOS-latest, windows-latest]
+        python-version: [3.6, 3.7, 3.8, 3.9]
     runs-on: ${{ matrix.platform }}
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
       - name: Setup Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: ${{ matrix.python-version }}
       - name: Set up cargo
         uses: actions-rs/cargo@v1
         with:
@@ -40,7 +40,7 @@ jobs:
           maturin build --release
       - name: Test
         run: |
-          pip install iondrive --no-index --find-links dist --force-reinstall
+          pip install iondrive --no-index --find-links target/wheels --force-reinstall
           pytest
       - name: Upload wheels
         uses: actions/upload-artifact@v2
@@ -67,7 +67,7 @@ jobs:
           maturin build --release
       - name: Test
         run: |
-          pip install iondrive --no-index --find-links dist --force-reinstall
+          pip install iondrive --no-index --find-links target/wheels --force-reinstall
           pytest
       - name: Upload wheels
         uses: actions/upload-artifact@v1  # v2 does not run in the image.
