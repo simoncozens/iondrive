@@ -35,9 +35,14 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements-dev.txt .
-      - name: Build release wheels
+      - name: Build release wheels (Windows)
+        if: contains(matrix.platform, 'windows')
         run: |
-          maturin build --release
+          maturin build --release --no-sdist --interpreter py
+      - name: Build release wheels (macOS)
+        if: contains(matrix.platform, 'macOS')
+        run: |
+          maturin build --release --no-sdist --interpreter `which python3`
       - name: Test
         run: |
           pip install iondrive --no-index --find-links target/wheels --force-reinstall
