@@ -1,17 +1,22 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: [master]
+    tags: ["v*.*.*"]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest, macOS-latest]
+        platform: [ubuntu-latest, macOS-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
 
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Setup Rust environment
         uses: actions-rs/toolchain@v1
         with:
@@ -19,21 +24,23 @@ jobs:
           toolchain: stable
           override: true
       - name: Setup Python environment
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.7
-      - name: rust-cargo
-        uses: actions-rs/cargo@v1.0.1
+          python-version: "3.x"
+      - name: Set up rust-cargo
+        uses: actions-rs/cargo@v1
         with:
           command: test
-      - name: py-deps
+      - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install cffi maturin .
-      - name: py-install
+          pip install cffi maturin pytest ufoLib2 .
+      - name: Build release wheels
         run: |
           maturin build --release
-      - uses: actions/upload-artifact@v1
+      - name: Test
+        run: pytest
+      - uses: actions/upload-artifact@v2
         name: upload-wheel
         with:
           name: wheel-${{ matrix.platform }}

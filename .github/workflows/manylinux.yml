@@ -1,6 +1,11 @@
 name: manylinux
 
-on: [push]
+on:
+  push:
+    branches: [master]
+    tags: ["v*.*.*"]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
@@ -9,12 +14,12 @@ jobs:
       image: konstin2/maturin:master
     steps:
       - name: checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: maturin-build
         run: |
           rustup default 1.41.0
           maturin build --release
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         name: upload-wheel
         with:
           name: wheel-manylinux
