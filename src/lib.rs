@@ -1,5 +1,4 @@
 use std::collections::BTreeMap;
-use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
 
@@ -212,8 +211,16 @@ create_exception!(readwrite_ufo_glif, IondriveError, PyException);
 fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
-    match norad::Font::load(Path::new(&path)) {
-        Ok(ufo) => Ok(ufo.to_wrapped_object(loader, py)),
+    match norad::Font::load(&path) {
+        Ok(ufo) => {
+            let object = ufo.to_wrapped_object(loader, py);
+            // ufoLib2 and defcon objects set the `_path` attribute when loading
+            // a UFO from disk, which fontmake relies on. Specifically set the
+            // private attribute here because ufoLib2 doesn't allow to setattr
+            // the public one.
+            object.as_ref(py).setattr("_path", &path)?;
+            Ok(object)
+        }
         Err(error) => Err(IondriveError::new_err(error.to_string())),
     }
 }
