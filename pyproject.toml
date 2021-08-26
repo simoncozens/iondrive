@@ -8,7 +8,6 @@ dependencies = ["ufoLib2>=0.11.1"]
 
 [tool.maturin]
 bindings = "pyo3"
-sdist-include = ["iondrive/py.typed"]
 
 # https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
 [tool.black]
