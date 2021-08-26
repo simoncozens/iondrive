@@ -208,12 +208,12 @@ create_exception!(readwrite_ufo_glif, IondriveError, PyException);
 /// exported by ufoLib2, typically this will be the module `ufoLib2.objects`.
 #[pyfunction]
 #[pyo3(text_signature = "(font_objects_module, path, /)")]
-fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
+fn load(font_objects_module: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
     match norad::Font::load(&path) {
         Ok(ufo) => {
-            let object = ufo.to_wrapped_object(loader, py);
+            let object = ufo.to_wrapped_object(font_objects_module, py);
             // ufoLib2 and defcon objects set the `_path` attribute when loading
             // a UFO from disk, which fontmake relies on. Specifically set the
             // private attribute here because ufoLib2 doesn't allow to setattr
