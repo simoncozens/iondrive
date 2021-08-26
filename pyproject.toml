@@ -2,10 +2,6 @@
 requires = ["maturin>=0.11,<0.12"]
 build-backend = "maturin"
 
-[project]
-name = "iondrive"
-dependencies = ["ufoLib2>=0.11.1"]
-
 [tool.maturin]
 bindings = "pyo3"
 
