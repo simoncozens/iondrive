@@ -11,6 +11,7 @@ rayon = "^1.5"
 norad = { version = "^0.5", features = ["rayon"] }
 pyo3 = { version = "^0.14", features = ["extension-module"] }
 plist = "^1.2"
+walkdir = "2"
 
 [lib]
 crate-type = ["cdylib"]
