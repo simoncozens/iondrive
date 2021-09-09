@@ -79,6 +79,10 @@ def test_equivalence(path: Path) -> None:
                     assert point.identifier == id_point.identifier
             assert glyph.guidelines == id_glyph.guidelines
 
-    # Not supported by norad yet:
+    # XXX: ufolib2: need to recursively un-lazify data for comparison?
     # assert font.data == id_font.data
+    for k, v in font.data.items():
+        assert id_font.data[k] == v
+
+    # Not supported by norad yet:
     # assert font.images == id_font.images

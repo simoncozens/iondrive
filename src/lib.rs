@@ -1,5 +1,4 @@
 use std::collections::BTreeMap;
-use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
 
@@ -7,6 +6,7 @@ use pyo3::create_exception;
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
+use pyo3::types::PyBytes;
 use pyo3::types::PyDict;
 use pyo3::wrap_pyfunction;
 
@@ -231,6 +231,40 @@ fn load(font_objects_module: &PyModule, path: PathBuf) -> PyResult<PyObject> {
             // private attribute here because ufoLib2 doesn't allow to setattr
             // the public one.
             object.as_ref(py).setattr("_path", &path)?;
+
+            let data_set = object.getattr(py, "data").map_err(|e| {
+                IondriveError::new_err(format!(
+                    "Cannot get Font's data attribute: {}",
+                    e.to_string()
+                ))
+            })?;
+            for data_path in ufo.data_paths() {
+                let full_path = path.join(data_path);
+                let internal_path: String = data_path
+                    .strip_prefix("data")
+                    .map_err(|e| {
+                        IondriveError::new_err(format!(
+                            "Failed to prepare data file path: {}",
+                            e.to_string()
+                        ))
+                    })?
+                    .iter()
+                    .map(|c| c.to_string_lossy().into_owned())
+                    .collect::<Vec<String>>()
+                    .join("/");
+                let contents = std::fs::read(&full_path).map_err(|e| {
+                    IondriveError::new_err(format!(
+                        "Failed to file {}: {}",
+                        &full_path.display(),
+                        e.to_string()
+                    ))
+                })?;
+
+                data_set
+                    .as_ref(py)
+                    .set_item(internal_path, PyBytes::new(py, &contents))?;
+            }
+
             Ok(object)
         }
         Err(error) => Err(IondriveError::new_err(error.to_string())),
