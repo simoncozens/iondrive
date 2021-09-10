@@ -245,6 +245,11 @@ fn wrap_data(
             .set_item(internal_path_posix, PyBytes::new(py, &contents))?;
     }
 
+    // Signal to ufoLib2 code that norad loads data eagerly.
+    if data_set.as_ref(py).hasattr("_lazy")? {
+        data_set.as_ref(py).setattr("_lazy", false)?;
+    }
+
     Ok(())
 }
 
@@ -290,6 +295,11 @@ fn wrap_images(
         images_set
             .as_ref(py)
             .set_item(internal_path_posix, PyBytes::new(py, &contents))?;
+    }
+
+    // Signal to ufoLib2 code that norad loads data eagerly.
+    if images_set.as_ref(py).hasattr("_lazy")? {
+        images_set.as_ref(py).setattr("_lazy", false)?;
     }
 
     Ok(())
@@ -341,6 +351,11 @@ fn load(font_objects_module: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     match norad::Font::load(&path) {
         Ok(ufo) => {
             let object = ufo.to_wrapped_object(font_objects_module, py);
+
+            // Signal to ufoLib2 code that norad loads data eagerly.
+            if object.as_ref(py).hasattr("_lazy")? {
+                object.as_ref(py).setattr("_lazy", false)?;
+            }
 
             // ufoLib2 and defcon objects set the `_path` attribute when loading
             // a UFO from disk, which fontmake relies on. Specifically set the

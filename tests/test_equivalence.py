@@ -97,12 +97,5 @@ def test_equivalence(path: Path) -> None:
                 assert guideline.color == id_guideline.color
                 assert guideline.identifier == id_guideline.identifier
 
-    # XXX: ufolib2: need to recursively un-lazify data and images for comparison?
-
-    # assert font.data == id_font.data
-    for k, v in font.data.items():
-        assert id_font.data[k] == v
-
-    # assert font.images == id_font.images
-    for k, v in font.images.items():
-        assert id_font.images[k] == v
+    assert font.data == id_font.data
+    assert font.images == id_font.images
