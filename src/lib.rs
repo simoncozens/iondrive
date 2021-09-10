@@ -201,16 +201,6 @@ impl ToWrappedPyObject for norad::Font {
     }
 }
 
-// fn wrap_data(path: &Path, object: &mut norad::Font) -> PyResult<PyObject> {
-//     let data_path = path.join("data");
-//     if data_path.is_file() {
-//         return Err(IondriveError::new_err(
-//             "UFO data is a file but must be a directory.",
-//         ));
-//     }
-//     walkdir::WalkDir::new(data_path)
-//         .into_iter()
-// }
 
 create_exception!(readwrite_ufo_glif, IondriveError, PyException);
 
