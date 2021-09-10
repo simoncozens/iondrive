@@ -295,6 +295,13 @@ fn wrap_images(
     Ok(())
 }
 
+/// Return path as a string with only forward slashes as path separators.
+///
+/// Error out if the path
+/// - cannot cleanly be converted to UTF-8, as the result is going to be
+///   used as a key in the images and data dictionaries Python-side.
+/// - does not appear to be relative or normalized, which is what we expect
+///   from norad.
 fn path_as_posix(path: &Path) -> PyResult<String> {
     let parts = path
         .components()
@@ -310,8 +317,8 @@ fn path_as_posix(path: &Path) -> PyResult<String> {
             },
             _ => {
                 return Err(IondriveError::new_err(format!(
-                    "Got unnormalized or absolute path from filesystem: {}",
-                    c.as_os_str().to_string_lossy()
+                    "Expected relative, normalized path but got: {}",
+                    path.display()
                 )))
             }
         })
