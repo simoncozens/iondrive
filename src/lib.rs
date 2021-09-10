@@ -201,8 +201,7 @@ impl ToWrappedPyObject for norad::Font {
     }
 }
 
-
-create_exception!(readwrite_ufo_glif, IondriveError, PyException);
+create_exception!(iondrive, IondriveError, PyException);
 
 /// Load and return a UFO from `path`, using the objects from `font_objects_module`.
 ///
