@@ -11,6 +11,8 @@ UFOS = [
     Path("tests/data/UbuTestData.ufo"),
     Path("tests/data/SourceSans_ExtraLight.ufo"),
     Path("tests/data/NotoSans-Regular.ufo"),
+    Path("tests/data/Empty.ufo"),
+    Path("tests/data/dataimagetest.ufo"),
 ]
 
 
@@ -77,12 +79,30 @@ def test_equivalence(path: Path) -> None:
                     assert point.smooth == id_point.smooth
                     assert point.name == id_point.name
                     assert point.identifier == id_point.identifier
-            assert glyph.guidelines == id_glyph.guidelines
+            assert len(glyph.guidelines) == len(id_glyph.guidelines)
+            for guideline, id_guideline in zip(glyph.guidelines, id_glyph.guidelines):
+                if guideline.x is None:
+                    assert guideline.x == id_guideline.x
+                else:
+                    assert close_enough(guideline.x, id_guideline.x)
+                if guideline.y is None:
+                    assert guideline.y == id_guideline.y
+                else:
+                    assert close_enough(guideline.y, id_guideline.y)
+                if guideline.angle is None:
+                    assert guideline.angle == id_guideline.angle
+                else:
+                    assert close_enough(guideline.angle, id_guideline.angle)
+                assert guideline.name == id_guideline.name
+                assert guideline.color == id_guideline.color
+                assert guideline.identifier == id_guideline.identifier
 
-    # XXX: ufolib2: need to recursively un-lazify data for comparison?
+    # XXX: ufolib2: need to recursively un-lazify data and images for comparison?
+
     # assert font.data == id_font.data
     for k, v in font.data.items():
         assert id_font.data[k] == v
 
-    # Not supported by norad yet:
     # assert font.images == id_font.images
+    for k, v in font.images.items():
+        assert id_font.images[k] == v
