@@ -1,8 +1,10 @@
 import math
 from pathlib import Path
+from typing import Optional, Set
 
 import pytest
 import ufoLib2
+import ufoLib2.objects
 
 import iondrive
 
@@ -13,6 +15,7 @@ UFOS = [
     Path("tests/data/NotoSans-Regular.ufo"),
     Path("tests/data/Empty.ufo"),
     Path("tests/data/dataimagetest.ufo"),
+    Path("tests/data/identifiers.ufo"),
 ]
 
 
@@ -20,6 +23,16 @@ def close_enough(a: float, b: float) -> bool:
     """Determine whether norad's f32 decimals are close enough to Python's
     f64 decimals."""
     return math.isclose(a, b, rel_tol=1e-07)
+
+
+def identifiers_in_glyph(glyph: ufoLib2.objects.Glyph) -> Set[Optional[str]]:
+    ids = set()
+    ids.update(a.identifier for a in glyph.anchors)
+    ids.update(g.identifier for g in glyph.guidelines)
+    ids.update(c.identifier for c in glyph.components)
+    ids.update(c.identifier for c in glyph.contours)
+    ids.update(p.identifier for c in glyph.contours for p in c.points)
+    return ids
 
 
 @pytest.mark.parametrize("path", UFOS, ids=lambda p: p.name)
@@ -48,6 +61,14 @@ def test_equivalence(path: Path) -> None:
             assert close_enough(glyph.height, id_glyph.height)
             assert glyph.unicodes == id_glyph.unicodes
             assert glyph.image == id_glyph.image
+            if "public.objectLibs" in glyph.lib:
+                # norad does not keep object libs for objects it can't find, so we need
+                # to filter them out for the comparison.
+                glyph.lib["public.objectLibs"] = {
+                    k: v
+                    for k, v in glyph.lib["public.objectLibs"].items()
+                    if k in identifiers_in_glyph(glyph)
+                }
             assert glyph.lib == id_glyph.lib
             assert glyph.note == id_glyph.note
             assert len(glyph.anchors) == len(id_glyph.anchors)

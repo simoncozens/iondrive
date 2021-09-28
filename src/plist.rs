@@ -32,3 +32,57 @@ impl MyToPyObject for plist::Dictionary {
         d.into()
     }
 }
+
+pub fn dump_glyph_object_libs(glyph: &norad::Glyph) -> norad::Plist {
+    let mut object_libs = norad::Plist::default();
+
+    let mut dump_lib = |id: Option<&norad::Identifier>, lib: &norad::Plist| {
+        let id = id.map(|id| id.as_str().to_string());
+        object_libs.insert(id.unwrap(), plist::Value::Dictionary(lib.clone()));
+    };
+
+    for anchor in &glyph.anchors {
+        if let Some(lib) = anchor.lib() {
+            dump_lib(anchor.identifier(), lib);
+        }
+    }
+
+    for guideline in &glyph.guidelines {
+        if let Some(lib) = guideline.lib() {
+            dump_lib(guideline.identifier(), lib);
+        }
+    }
+
+    for contour in &glyph.contours {
+        if let Some(lib) = contour.lib() {
+            dump_lib(contour.identifier(), lib);
+        }
+        for point in &contour.points {
+            if let Some(lib) = point.lib() {
+                dump_lib(point.identifier(), lib);
+            }
+        }
+    }
+    for component in &glyph.components {
+        if let Some(lib) = component.lib() {
+            dump_lib(component.identifier(), lib);
+        }
+    }
+
+    object_libs
+}
+
+pub fn dump_fontinfo_object_libs(fontinfo: &norad::FontInfo) -> norad::Plist {
+    let mut object_libs = norad::Plist::default();
+
+    if let Some(guidelines) = &fontinfo.guidelines {
+        for guideline in guidelines {
+            if let Some(lib) = guideline.lib() {
+                let id = guideline.identifier().map(|id| id.as_str().to_string());
+                object_libs.insert(id.unwrap(), plist::Value::Dictionary(lib.clone()));
+            }
+        }
+    }
+
+    object_libs
+}

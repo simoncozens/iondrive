@@ -93,6 +93,13 @@ where
 impl ToWrappedPyObject for Arc<norad::Glyph> {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
         let cls = loader.getattr("Glyph").unwrap();
+
+        let mut lib = self.lib.clone();
+        let object_libs = plist::dump_glyph_object_libs(&self);
+        if !object_libs.is_empty() {
+            lib.insert("public.objectLibs".into(), object_libs.into());
+        }
+
         let kwargs = [
             ("name", self.name.to_object(py)),
             ("width", self.width.to_object(py)),
@@ -105,7 +112,7 @@ impl ToWrappedPyObject for Arc<norad::Glyph> {
                     .collect::<Vec<PyObject>>()
                     .to_object(py),
             ),
-            ("lib", self.lib.to_object(py)),
+            ("lib", lib.to_object(py)),
             ("note", self.note.to_object(py)),
             ("anchors", self.anchors.to_wrapped_object(loader, py)),
             ("contours", self.contours.to_wrapped_object(loader, py)),
@@ -202,8 +209,16 @@ where
 fn wrap_font(font: &norad::Font, loader: &PyModule, py: Python) -> PyResult<PyObject> {
     let py_font = loader.getattr("Font").unwrap();
 
+    let mut lib = font.lib.clone();
+    if let Some(fontinfo) = &font.font_info {
+        let object_libs = plist::dump_fontinfo_object_libs(fontinfo);
+        if !object_libs.is_empty() {
+            lib.insert("public.objectLibs".into(), object_libs.into());
+        }
+    }
+
     let kwargs = [
-        ("lib", font.lib.to_object(py)),
+        ("lib", lib.to_object(py)),
         ("layers", wrap_layerset(&font.layers, loader, py)),
         (
             "info",
