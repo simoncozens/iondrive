@@ -96,6 +96,7 @@ impl ToWrappedPyObject for Arc<norad::Glyph> {
         let kwargs = [
             ("name", self.name.to_object(py)),
             ("width", self.width.to_object(py)),
+            ("height", self.height.to_object(py)),
             (
                 "unicodes",
                 self.codepoints
