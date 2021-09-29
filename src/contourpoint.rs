@@ -19,8 +19,8 @@ impl ToWrappedPyObject for norad::ContourPoint {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
         let cls = loader.getattr("Point").unwrap();
         let kwargs = [
-            ("x", f32_to_int_or_float(self.x, py)),
-            ("y", f32_to_int_or_float(self.y, py)),
+            ("x", f64_to_int_or_float(self.x, py)),
+            ("y", f64_to_int_or_float(self.y, py)),
             ("type", self.typ.to_object(py)),
             ("smooth", self.smooth.to_object(py)),
             ("name", self.name.to_object(py)),
@@ -37,8 +37,8 @@ impl ToWrappedPyObject for norad::ContourPoint {
 
 /// Converts value to a Python integer if it can be considered one, otherwise a
 /// Python float.
-fn f32_to_int_or_float(v: f32, py: Python) -> PyObject {
-    if (v - v.round()).abs() < std::f32::EPSILON {
+fn f64_to_int_or_float(v: f64, py: Python) -> PyObject {
+    if (v - v.round()).abs() < std::f64::EPSILON {
         (v as i32).to_object(py)
     } else {
         v.to_object(py)
