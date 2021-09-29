@@ -1,4 +1,5 @@
 use std::collections::BTreeMap;
+use std::collections::HashMap;
 use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -7,7 +8,7 @@ use pyo3::create_exception;
 use pyo3::exceptions::PyException;
 use pyo3::prelude::*;
 use pyo3::types::IntoPyDict;
-use pyo3::types::PyDict;
+use pyo3::types::{PyBytes, PyDict};
 use pyo3::wrap_pyfunction;
 
 mod anchor;
@@ -92,9 +93,17 @@ where
 impl ToWrappedPyObject for Arc<norad::Glyph> {
     fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
         let cls = loader.getattr("Glyph").unwrap();
+
+        let mut lib = self.lib.clone();
+        let object_libs = plist::dump_glyph_object_libs(&self);
+        if !object_libs.is_empty() {
+            lib.insert("public.objectLibs".into(), object_libs.into());
+        }
+
         let kwargs = [
             ("name", self.name.to_object(py)),
             ("width", self.width.to_object(py)),
+            ("height", self.height.to_object(py)),
             (
                 "unicodes",
                 self.codepoints
@@ -103,7 +112,7 @@ impl ToWrappedPyObject for Arc<norad::Glyph> {
                     .collect::<Vec<PyObject>>()
                     .to_object(py),
             ),
-            ("lib", self.lib.to_object(py)),
+            ("lib", lib.to_object(py)),
             ("note", self.note.to_object(py)),
             ("anchors", self.anchors.to_wrapped_object(loader, py)),
             ("contours", self.contours.to_wrapped_object(loader, py)),
@@ -173,35 +182,99 @@ fn wrap_kerning(kerning: Option<&norad::Kerning>, py: Python) -> PyObject {
     }
 }
 
-impl ToWrappedPyObject for norad::Font {
-    fn to_wrapped_object(&self, loader: &PyModule, py: Python) -> PyObject {
-        let font = loader.getattr("Font").unwrap();
+fn wrap_data_store<T>(store: &norad::datastore::Store<T>, py: Python) -> PyResult<PyObject>
+where
+    T: norad::datastore::DataType,
+{
+    let mut py_data: HashMap<String, &PyBytes> = HashMap::new();
 
-        let kwargs = [
-            ("lib", self.lib.to_object(py)),
-            ("layers", wrap_layerset(&self.layers, loader, py)),
-            ("info", self.font_info.to_wrapped_object(loader, py)),
-            (
-                "features",
-                self.features
-                    .as_ref()
-                    .map_or("", |v| v.as_str())
-                    .to_object(py),
-            ),
-            (
-                "groups",
-                self.groups
-                    .as_ref()
-                    .map_or(PyDict::new(py).to_object(py), |v| v.to_object(py)),
-            ),
-            ("kerning", wrap_kerning(self.kerning.as_ref(), py)),
-        ]
-        .into_py_dict(py);
-        font.call((), Some(kwargs)).unwrap().into()
+    for (path, data) in store.iter() {
+        match data {
+            Ok(content) => {
+                py_data.insert(path_as_posix(&path)?, PyBytes::new(py, &content));
+            }
+            Err(e) => {
+                return Err(IondriveError::new_err(format!(
+                    "Cannot wrap data for {}: {}",
+                    path.display(),
+                    e.to_string()
+                )))
+            }
+        }
     }
+
+    Ok(py_data.into_py_dict(py).to_object(py))
 }
 
-create_exception!(readwrite_ufo_glif, IondriveError, PyException);
+fn wrap_font(font: &norad::Font, loader: &PyModule, py: Python) -> PyResult<PyObject> {
+    let py_font = loader.getattr("Font").unwrap();
+
+    let mut lib = font.lib.clone();
+    if let Some(fontinfo) = &font.font_info {
+        let object_libs = plist::dump_fontinfo_object_libs(fontinfo);
+        if !object_libs.is_empty() {
+            lib.insert("public.objectLibs".into(), object_libs.into());
+        }
+    }
+
+    let kwargs = [
+        ("lib", lib.to_object(py)),
+        ("layers", wrap_layerset(&font.layers, loader, py)),
+        (
+            "info",
+            font.font_info
+                .as_ref()
+                .map_or(PyDict::new(py).to_object(py), |v| {
+                    v.to_wrapped_object(loader, py)
+                }),
+        ),
+        (
+            "features",
+            font.features
+                .as_ref()
+                .map_or("", |v| v.as_str())
+                .to_object(py),
+        ),
+        (
+            "groups",
+            font.groups
+                .as_ref()
+                .map_or(PyDict::new(py).to_object(py), |v| v.to_object(py)),
+        ),
+        ("kerning", wrap_kerning(font.kerning.as_ref(), py)),
+        ("data", wrap_data_store(&font.data, py)?),
+        ("images", wrap_data_store(&font.images, py)?),
+    ]
+    .into_py_dict(py);
+
+    Ok(py_font.call((), Some(kwargs)).unwrap().into())
+}
+
+/// Return path as a string with only forward slashes as path separators.
+///
+/// Error out if the path cannot cleanly be converted to UTF-8, as the result is
+/// going to be used as a key in the images and data dictionaries Python-side.
+fn path_as_posix(path: &Path) -> PyResult<String> {
+    let parts = path
+        .components()
+        .map(|c| match c {
+            std::path::Component::Normal(n) => match n.to_str() {
+                Some(s) => Ok(s),
+                None => {
+                    return Err(IondriveError::new_err(format!(
+                        "Cannot cleanly represent path: {}",
+                        c.as_os_str().to_string_lossy()
+                    )))
+                }
+            },
+            _ => unreachable!(), // norad ensures internally that paths are valid, aside from being valid UTF-8.
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+
+    Ok(parts.join("/"))
+}
+
+create_exception!(iondrive, IondriveError, PyException);
 
 /// Load and return a UFO from `path`, using the objects from `font_objects_module`.
 ///
@@ -209,11 +282,26 @@ create_exception!(readwrite_ufo_glif, IondriveError, PyException);
 /// exported by ufoLib2, typically this will be the module `ufoLib2.objects`.
 #[pyfunction]
 #[pyo3(text_signature = "(font_objects_module, path, /)")]
-fn load(loader: &PyModule, path: PathBuf) -> PyResult<PyObject> {
+fn load(font_objects_module: &PyModule, path: PathBuf) -> PyResult<PyObject> {
     let gil = Python::acquire_gil();
     let py = gil.python();
-    match norad::Font::load(Path::new(&path)) {
-        Ok(ufo) => Ok(ufo.to_wrapped_object(loader, py)),
+    match norad::Font::load(&path) {
+        Ok(ufo) => {
+            let object = wrap_font(&ufo, font_objects_module, py)?;
+
+            // Signal to ufoLib2 code that norad loads data eagerly.
+            if object.as_ref(py).hasattr("_lazy")? {
+                object.as_ref(py).setattr("_lazy", false)?;
+            }
+
+            // ufoLib2 and defcon objects set the `_path` attribute when loading
+            // a UFO from disk, which fontmake relies on. Specifically set the
+            // private attribute here because ufoLib2 doesn't allow to setattr
+            // the public one.
+            object.as_ref(py).setattr("_path", &path)?;
+
+            Ok(object)
+        }
         Err(error) => Err(IondriveError::new_err(error.to_string())),
     }
 }
