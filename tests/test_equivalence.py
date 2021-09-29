@@ -40,6 +40,8 @@ def test_equivalence(path: Path) -> None:
     assert font.kerning == id_font.kerning
     assert font.features == id_font.features
     assert font.info == id_font.info
+    assert font.data == id_font.data
+    assert font.images == id_font.images
     assert font.layers.keys() == id_font.layers.keys()
     for layer_name in font.layers.keys():
         layer = font.layers[layer_name]
@@ -69,6 +71,3 @@ def test_equivalence(path: Path) -> None:
             assert glyph.components == id_glyph.components
             assert glyph.contours == id_glyph.contours
             assert glyph.guidelines == id_glyph.guidelines
-
-    assert font.data == id_font.data
-    assert font.images == id_font.images
